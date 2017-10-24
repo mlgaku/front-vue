@@ -2,18 +2,24 @@
 import Card from './Card'
 import InputBox from './InputBox'
 
+import { NODE_ADD } from '@/store/types'
+
 export default {
     data: () => ({
         // 显示模态框
         show: false,
-        // 子节点名
+        // 节点名
         name: '',
-        // 子节点标题
-        title: ''
+        // 节点标题
+        title: '',
+        // 父节点ID
+        parent: ''
     }),
 
     methods: {
-
+        addNode () {
+            this.$store.dispatch(NODE_ADD)
+        }
     },
 
     components: { Card, InputBox }
@@ -65,7 +71,7 @@ export default {
         </ul>
     </Card>
     <!-- 模态框 -->
-    <InputBox :show="show" title="添子节点" @close="show = false">
+    <InputBox :show="show" title="添子节点" @close="show = false" @submit="addNode()">
         <form>
             <md-input-container>
                 <label>名称</label>

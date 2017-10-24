@@ -1,5 +1,5 @@
 import Channel from './channel'
 
-export const plugins = [
+export default [
     Channel
 ]

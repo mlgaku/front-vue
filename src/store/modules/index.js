@@ -1,5 +1,7 @@
+import Node from './node'
 import Test from './test'
 
-export const modules = [
+export default {
+    Node,
     Test
-]
+}
