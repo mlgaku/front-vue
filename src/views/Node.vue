@@ -1,10 +1,10 @@
 <script>
 import Card from '@/components/Card'
 import Toolbar from '@/components/Toolbar'
-import TopicList from '@/components/TopicList'
+import NodeList from '@/components/NodeList'
 
 export default {
-    components: { Card, Toolbar, TopicList }
+    components: { Card, Toolbar, NodeList }
 }
 </script>
 
@@ -17,8 +17,7 @@ export default {
             <md-layout md-flex="65">
                 <md-layout class="main" md-gutter="16">
                     <md-layout md-flex="75">
-                        <!-- 列表 -->
-                        <TopicList/>
+                        <NodeList/>
                     </md-layout>
                     <md-layout md-flex="25">
                         <!-- 卡片 -->

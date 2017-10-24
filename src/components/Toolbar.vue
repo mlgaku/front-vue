@@ -16,9 +16,15 @@ export default {
                 <img :src="logo">
 
                 <div class="menu">
-                    <md-button class="md-dense">首页</md-button>
-                    <md-button class="md-dense">节点</md-button>
-                    <md-button class="md-dense">排行榜</md-button>
+                    <router-link to="/">
+                        <md-button class="md-dense">首页</md-button>
+                    </router-link>
+                    <router-link to="/node">
+                        <md-button class="md-dense">节点</md-button>
+                    </router-link>
+                    <router-link to="/rank">
+                        <md-button class="md-dense">排行榜</md-button>
+                    </router-link>
                 </div>
 
                 <md-button class="md-icon-button">
@@ -35,10 +41,16 @@ export default {
     flex: 1;
     margin-left: 50px;
 }
+.menu a {
+    color: inherit !important;
+}
 .md-layout {
     align-items: center;
 }
 .md-button {
     min-width: auto;
+}
+.router-link-exact-active button {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 </style>
