@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "vee-validate": "^2.0.0-rc.19",
     "vue": "^2.5.2",
     "vue-material": "^0.7.5",
