@@ -18,7 +18,6 @@ export default {
     methods: {
         reg () {
             if (this.validate()) {
-                console.log(123)
                 this.$store.dispatch(USER_REG, this.regInfo)
             }
         },

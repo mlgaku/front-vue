@@ -36,7 +36,7 @@ export default {
 
 <template>
 <md-dialog :ref="name" :md-click-outside-to-close="false">
-    <md-dialog-title>{{title}}</md-dialog-title>
+    <md-dialog-title>{{ title }}</md-dialog-title>
 
     <md-dialog-content>
         <slot v-if="alive"/>

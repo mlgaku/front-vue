@@ -4,6 +4,13 @@ const channel = socket => {
     return store => {
         socket.on('message', e => {
             const { type, data } = Protocol(e.data)
+
+            // 操作失败显示提示
+            if (data.status === false) {
+                store.state.msg = data.msg
+                return
+            }
+
             store.commit(type, {
                 ...data,
                 __INTAL__: true

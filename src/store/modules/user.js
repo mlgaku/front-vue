@@ -17,10 +17,10 @@ const actions = {
 
 const mutations = {
     [USER_REG] (state, data) {
-        console.log(state)
+        // console.log(state)
     },
     [USER_LOGIN] (state, data) {
-        console.log(state)
+        // console.log(state)
     }
 }
 
