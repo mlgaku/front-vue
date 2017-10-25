@@ -1,5 +1,4 @@
 <script>
-import _ from 'lodash'
 import InputBox from './InputBox'
 import { mapState } from 'vuex'
 import { Validator } from 'vee-validate'
@@ -36,27 +35,27 @@ export default {
     created () {
         // 检查用户名
         Validator.extend('check_name', {
-            validate: _.debounce(value => {
+            validate: value => {
                 this.$store.dispatch(USER_CHECK, value)
                 return new Promise(resolve => {
                     this.checkName = valid => resolve({
                         valid, data: { message: '用户名已存在' }
                     })
                 })
-            }, 500),
-            getMessage: (field, params, data) => data.message
+            },
+            getMessage: (field, params, data) => (data && data.message) || undefined
         })
         // 检查邮箱地址
         Validator.extend('check_email', {
-            validate: _.debounce(value => {
+            validate: value => {
                 this.$store.dispatch(USER_CHECK_EMAIL, value)
                 return new Promise(resolve => {
                     this.checkEmail = valid => resolve({
                         valid, data: { message: '邮箱地址已存在' }
                     })
                 })
-            }, 500),
-            getMessage: (field, params, data) => data.message
+            },
+            getMessage: (field, params, data) => (data && data.message) || undefined
         })
     },
 

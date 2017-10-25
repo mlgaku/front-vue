@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { USER_REG, USER_LOGIN, USER_CHECK, USER_CHECK_EMAIL } from '../types'
 
 const state = {
@@ -18,12 +19,12 @@ const actions = {
     [USER_LOGIN] ({ commit }, info) {
         commit(USER_LOGIN, info)
     },
-    [USER_CHECK] ({ commit }, name) {
+    [USER_CHECK]: _.debounce(({ commit }, name) => {
         commit(USER_CHECK, { name })
-    },
-    [USER_CHECK_EMAIL] ({ commit }, email) {
+    }, 500),
+    [USER_CHECK_EMAIL]: _.debounce(({ commit }, email) => {
         commit(USER_CHECK_EMAIL, { email })
-    }
+    }, 500)
 }
 
 const mutations = {
