@@ -1,7 +1,11 @@
 <script>
 import Vue from 'vue'
+
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
+
+import VeeValidate, { Validator } from 'vee-validate'
+import zh from 'vee-validate/dist/locale/zh_CN'
 
 Vue.use(VueMaterial)
 Vue.material.registerTheme('default', {
@@ -9,6 +13,9 @@ Vue.material.registerTheme('default', {
     accent: 'red',
     warn: 'red'
 })
+
+Validator.localize('zh', zh)
+Vue.use(VeeValidate)
 
 export default {}
 </script>

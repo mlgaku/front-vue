@@ -1,5 +1,9 @@
 <script>
 export default {
+    data: () => ({
+        alive: false
+    }),
+
     props: {
         // ID
         id: String,
@@ -12,7 +16,13 @@ export default {
     watch: {
         show (val) {
             const { open, close } = this.$refs[this.name]
-            val ? open() : close()
+            if (val) {
+                this.alive = true
+                open()
+            } else {
+                close()
+                setTimeout(() => { this.alive = false }, 500)
+            }
         }
     },
 
@@ -29,7 +39,7 @@ export default {
     <md-dialog-title>{{title}}</md-dialog-title>
 
     <md-dialog-content>
-        <slot/>
+        <slot v-if="alive"/>
     </md-dialog-content>
 
     <md-dialog-actions>
@@ -38,3 +48,9 @@ export default {
     </md-dialog-actions>
 </md-dialog>
 </template>
+
+<style>
+.md-dialog {
+    min-width: 350px;
+}
+</style>

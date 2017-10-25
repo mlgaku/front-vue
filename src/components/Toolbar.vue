@@ -1,39 +1,132 @@
 <script>
+import InputBox from './InputBox'
+import { USER_REG, USER_LOGIN } from '@/store/types'
+
 import logo from '@/assets/logo.png'
 
 export default {
     data: () => ({
-        logo
-    })
+        logo,
+        // 显示模态框
+        show: 0,
+        // 注册信息
+        regInfo: {},
+        // 登录信息
+        loginInfo: {}
+    }),
+
+    methods: {
+        reg () {
+            if (this.validate()) {
+                console.log(123)
+                this.$store.dispatch(USER_REG, this.regInfo)
+            }
+        },
+        login () {
+            if (this.validate()) {
+                this.$store.dispatch(USER_LOGIN, this.loginInfo)
+            }
+        },
+        validate () {
+            this.$validator.validateAll()
+            return !this.errors.any()
+        }
+    },
+
+    components: { InputBox }
 }
 </script>
 
 <template>
-<md-whiteframe md-elevation="2">
-    <md-toolbar>
-        <md-layout md-align="center" md-gutter="16">
-            <md-layout md-flex="65">
-                <img :src="logo">
+<div>
+    <md-whiteframe md-elevation="2">
+        <md-toolbar>
+            <md-layout md-align="center" md-gutter="16">
+                <md-layout md-flex="65">
+                    <img :src="logo">
 
-                <div class="menu">
-                    <router-link to="/">
-                        <md-button class="md-dense">首页</md-button>
-                    </router-link>
-                    <router-link to="/node">
-                        <md-button class="md-dense">节点</md-button>
-                    </router-link>
-                    <router-link to="/rank">
-                        <md-button class="md-dense">排行榜</md-button>
-                    </router-link>
-                </div>
+                    <div class="menu">
+                        <router-link to="/">
+                            <md-button class="md-dense">首页</md-button>
+                        </router-link>
+                        <router-link to="/node">
+                            <md-button class="md-dense">节点</md-button>
+                        </router-link>
+                        <router-link to="/rank">
+                            <md-button class="md-dense">排行榜</md-button>
+                        </router-link>
+                    </div>
 
-                <md-button class="md-icon-button">
-                    <md-icon>favorite</md-icon>
-                </md-button>
+                    <md-button class="md-dense" @click="show = 1">注册</md-button>
+                    <md-button class="md-dense" @click="show = 2">登录</md-button>
+                </md-layout>
             </md-layout>
-        </md-layout>
-    </md-toolbar>
-</md-whiteframe>
+        </md-toolbar>
+    </md-whiteframe>
+
+    <!-- 注册模态框 -->
+    <InputBox :show="show === 1" title="注册" @close="show = 0" @submit="reg()">
+        <form novalidate @submit.stop.prevent>
+            <md-input-container :class="{'md-input-invalid': errors.has('name')}">
+                <label>用户名</label>
+                <md-input
+                    required
+                    name="name"
+                    v-model="regInfo.name"
+                    v-validate="'required|min:4|max:15'"/>
+                <span class="md-error" v-show="errors.has('name')">{{ errors.first('name') }}</span>
+            </md-input-container>
+
+            <md-input-container :class="{'md-input-invalid': errors.has('password')}" md-has-password>
+                <label>密码</label>
+                <md-input
+                    required
+                    name="password"
+                    type="password"
+                    v-model="regInfo.password"
+                    v-validate="'required|min:8|max:20'"/>
+                <span class="md-error" v-show="errors.has('password')">{{ errors.first('password') }}</span>
+            </md-input-container>
+
+            <md-input-container :class="{'md-input-invalid': errors.has('email')}">
+                <label>邮箱地址</label>
+                <md-input
+                    required
+                    name="email"
+                    type="email"
+                    v-model="regInfo.email"
+                    v-validate="'required|email|min:8|max:30'"/>
+                <span class="md-error" v-show="errors.has('email')">{{ errors.first('email') }}</span>
+            </md-input-container>
+        </form>
+    </InputBox>
+
+    <!-- 登录模态框 -->
+    <InputBox :show="show === 2" title="登录" @close="show = 0" @submit="login()">
+        <form novalidate @submit.stop.prevent>
+            <md-input-container :class="{'md-input-invalid': errors.has('name')}">
+                <label>用户名</label>
+                <md-input
+                    required
+                    name="name"
+                    v-model="loginInfo.name"
+                    v-validate="'required|min:4|max:15'"/>
+                <span class="md-error" v-show="errors.has('name')">{{ errors.first('name') }}</span>
+            </md-input-container>
+
+            <md-input-container :class="{'md-input-invalid': errors.has('password')}">
+                <label>密码</label>
+                <md-input
+                    required
+                    name="password"
+                    type="password"
+                    v-model="loginInfo.password"
+                    v-validate="'required|min:8|max:20'"/>
+                <span class="md-error" v-show="errors.has('password')">{{ errors.first('password') }}</span>
+            </md-input-container>
+        </form>
+    </InputBox>
+</div>
 </template>
 
 <style scoped>
