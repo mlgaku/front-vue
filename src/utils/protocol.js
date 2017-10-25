@@ -7,7 +7,7 @@ const protocol = (info, data = null) => {
     } else {                     // 解包
         const { mod, act, body } = JSON.parse(info)
         return {
-            type: `${mod}_${act}`.toUpperCase(),
+            type: `${mod}_${act.replace(/([A-Z])/g, '_$1')}`.toUpperCase(),
             data: JSON.parse(body)
         }
     }

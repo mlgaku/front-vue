@@ -4,20 +4,16 @@ import Vue from 'vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 
-import VeeValidate, { Validator } from 'vee-validate'
-import zh from 'vee-validate/dist/locale/zh_CN'
-
+import { Validator } from './utils'
 import Snackbar from './components/Snackbar'
 
+Vue.use(Validator)
 Vue.use(VueMaterial)
 Vue.material.registerTheme('default', {
     primary: 'blue',
     accent: 'red',
     warn: 'red'
 })
-
-Validator.localize('zh', zh)
-Vue.use(VeeValidate)
 
 export default {
     components: { Snackbar }
@@ -27,7 +23,7 @@ export default {
 <template>
 <div id="app">
     <router-view/>
-    <!-- 提示 -->
+    <!-- 全局提示 -->
     <Snackbar :msg="$store.state.msg" @close="$store.state.msg = ''"/>
 </div>
 </template>

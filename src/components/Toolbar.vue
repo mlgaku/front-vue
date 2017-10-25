@@ -1,6 +1,8 @@
 <script>
 import InputBox from './InputBox'
-import { USER_REG, USER_LOGIN } from '@/store/types'
+import { mapState } from 'vuex'
+import { Validator } from 'vee-validate'
+import { USER_REG, USER_LOGIN, USER_CHECK, USER_CHECK_EMAIL } from '@/store/types'
 
 import logo from '@/assets/logo.png'
 
@@ -15,22 +17,63 @@ export default {
         loginInfo: {}
     }),
 
-    methods: {
-        reg () {
-            if (this.validate()) {
-                this.$store.dispatch(USER_REG, this.regInfo)
+    watch: {
+        'check.name': {
+            deep: true,
+            handler: function (val) {
+                val === undefined || this.checkName(val)
             }
         },
-        login () {
-            if (this.validate()) {
-                this.$store.dispatch(USER_LOGIN, this.loginInfo)
+        'check.email': {
+            deep: true,
+            handler: function (val) {
+                val === undefined || this.checkEmail(val)
             }
-        },
-        validate () {
-            this.$validator.validateAll()
-            return !this.errors.any()
         }
     },
+
+    created () {
+        // 检查用户名
+        Validator.extend('check_name', {
+            validate: value => {
+                this.$store.dispatch(USER_CHECK, value)
+                return new Promise(resolve => {
+                    this.checkName = valid => resolve({
+                        valid, data: { message: '用户名已存在' }
+                    })
+                })
+            },
+            getMessage: (field, params, data) => data.message
+        })
+        // 检查邮箱地址
+        Validator.extend('check_email', {
+            validate: value => {
+                this.$store.dispatch(USER_CHECK_EMAIL, value)
+                return new Promise(resolve => {
+                    this.checkEmail = valid => resolve({
+                        valid, data: { message: '邮箱地址已存在' }
+                    })
+                })
+            },
+            getMessage: (field, params, data) => data.message
+        })
+    },
+
+    methods: {
+        reg () {
+            this.validate(() => this.$store.dispatch(USER_REG, this.regInfo))
+        },
+        login () {
+            this.validate(() => this.$store.dispatch(USER_LOGIN, this.loginInfo))
+        },
+        validate (fn) {
+            this.$validator.validateAll().then(() => this.errors.any() || fn())
+        }
+    },
+
+    computed: mapState({
+        check: s => s.user.check
+    }),
 
     components: { InputBox }
 }
@@ -72,7 +115,7 @@ export default {
                     required
                     name="name"
                     v-model="regInfo.name"
-                    v-validate="'required|min:4|max:15'"/>
+                    v-validate="'required|min:4|max:15|check_name'"/>
                 <span class="md-error" v-show="errors.has('name')">{{ errors.first('name') }}</span>
             </md-input-container>
 
@@ -94,7 +137,7 @@ export default {
                     name="email"
                     type="email"
                     v-model="regInfo.email"
-                    v-validate="'required|email|min:8|max:30'"/>
+                    v-validate="'required|email|min:8|max:30|check_email'"/>
                 <span class="md-error" v-show="errors.has('email')">{{ errors.first('email') }}</span>
             </md-input-container>
         </form>

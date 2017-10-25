@@ -1,9 +1,9 @@
-import Node from './node'
-import User from './user'
-import Test from './test'
+import node from './node'
+import user from './user'
+import test from './test'
 
 export default {
-    Node,
-    User,
-    Test
+    node,
+    user,
+    test
 }

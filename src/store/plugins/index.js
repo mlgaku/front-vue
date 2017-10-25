@@ -1,5 +1,5 @@
-import Channel from './channel'
+import channel from './channel'
 
 export default [
-    Channel
+    channel
 ]

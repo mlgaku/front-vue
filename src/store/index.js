@@ -11,7 +11,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        // 提示信息
+        // 全局提示
         msg: ''
     },
 

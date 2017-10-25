@@ -11,3 +11,5 @@ export const NODE_ADD = 'NODE_ADD'
 // 用户
 export const USER_REG = 'USER_REG'
 export const USER_LOGIN = 'USER_LOGIN'
+export const USER_CHECK = 'USER_CHECK'
+export const USER_CHECK_EMAIL = 'USER_CHECK_EMAIL'
