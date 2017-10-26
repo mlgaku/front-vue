@@ -1,15 +1,12 @@
-let ws = null
-
 const socket = addr => {
-    ws = new WebSocket(addr)
+    const ws = new WebSocket(addr)
 
     return {
         on: (ev, fn) => {
             ws[`on${ev}`] = fn
         },
-        emit: (ev, ...arg) => {
-            return ws[ev](...arg)
-        }
+        emit: (ev, ...arg) => ws[ev](...arg),
+        state: () => ws.readyState
     }
 }
 

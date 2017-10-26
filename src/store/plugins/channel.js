@@ -1,8 +1,20 @@
 import { MSG } from '@/store/types'
 import { Socket, Convert, Protocol } from '@/utils'
 
-const channel = socket => {
+const channel = function (socket) {
+    // 待发消息队列
+    const queue = new Set()
+
     return store => {
+        // 成功建立
+        socket.on('open', () => {
+            for (let x of queue) {
+                queue.delete(x)
+                socket.emit('send', JSON.parse(x))
+            }
+        })
+
+        // 收到消息
         socket.on('message', e => {
             const { type, data } = Protocol(e.data)
 
@@ -18,14 +30,22 @@ const channel = socket => {
             })
         })
 
+        // 发出消息
         store.subscribe(m => {
             if (m.payload === undefined || m.payload.__INTAL__ === true) {
                 return
             }
 
             const { mod, act } = Convert(m.type)
-            if (act !== '') {
-                socket.emit('send', Protocol({ mod, act }, m.payload))
+            if (act === '') {
+                return
+            }
+
+            const data = Protocol({ mod, act }, m.payload)
+            if (socket.state() === 1) {
+                socket.emit('send', data)
+            } else {
+                queue.add(JSON.stringify(data))
             }
         })
     }
