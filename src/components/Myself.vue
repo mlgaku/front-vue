@@ -9,15 +9,13 @@ export default {}
     </md-button>
 
     <md-menu-content>
-        <div class="author-card">
-            <md-avatar class="md-large">
+        <div class="card">
+            <md-avatar>
                 <img src="http://vuematerial.io/assets/marcosmoura.jpg">
             </md-avatar>
-            <div class="author-card-info">
+            <div class="card-info">
                 <span>sxyazi</span>
-                <div class="author-card-links">
-                    <a>sxyazi@gmail.com</a>
-                </div>
+                <span>sxyazi@gmail.com</span>
             </div>
         </div>
         <md-menu-item>余额</md-menu-item>
@@ -28,7 +26,7 @@ export default {}
 </template>
 
 <style scoped>
-.author-card {
+.card {
     display: flex;
     padding: 8px 16px;
     align-items: center;
@@ -36,34 +34,35 @@ export default {}
     margin-top: -8px;
     margin-bottom: 8px;
 }
-.md-large {
+.md-button {
+    padding: 3px;
+    box-sizing: content-box;
+}
+.md-button img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.md-avatar {
     width: 40px;
     height: 40px;
     min-width: auto;
     min-height: auto;
     border-radius: 50%;
-}
-.md-avatar {
     margin-right: 16px;
 }
-.author-card span {
-    font-size: 16px;
-}
-.author-card-info {
+.card-info {
     flex: 1;
     display: flex;
     flex-flow: column;
 }
-.author-card-links {
-    display: flex;
+.card-info span:nth-child(1) {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 25px;
 }
-.md-icon-button {
-    padding: 3px;
-    box-sizing: content-box;
-}
-.md-icon-button img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+.card-info span:nth-child(2) {
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.87);
 }
 </style>
