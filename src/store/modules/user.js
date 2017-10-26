@@ -5,7 +5,9 @@ const state = {
     // 注册
     reg: false,
     // 登录
-    login: {},
+    login: {
+        id: 'djldshjlsfhgdfjlglhj'
+    },
     // 检查
     check: {
         name: true,

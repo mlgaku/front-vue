@@ -1,10 +1,13 @@
 <script>
-import InputBox from './InputBox'
 import { mapState } from 'vuex'
 import { Validator } from 'vee-validate'
-import { MSG, USER_REG, USER_LOGIN, USER_CHECK, USER_CHECK_EMAIL } from '@/store/types'
 
+import Notice from './Notice'
+import Myself from './Myself'
+import InputBox from './InputBox'
 import logo from '@/assets/logo.png'
+
+import { MSG, USER_REG, USER_LOGIN, USER_CHECK, USER_CHECK_EMAIL } from '@/store/types'
 
 export default {
     data: () => ({
@@ -18,22 +21,21 @@ export default {
     }),
 
     watch: {
-        'check.name': {
-            deep: true,
-            handler: function (val) {
-                val === undefined || this.checkName(val)
-            }
+        'check.name': function (val) {
+            val === undefined || this.checkName(val)
         },
-        'check.email': {
-            deep: true,
-            handler: function (val) {
-                val === undefined || this.checkEmail(val)
-            }
+        'check.email': function (val) {
+            val === undefined || this.checkEmail(val)
         },
         regStatus: function (val) {
             if (val === true) {
                 this.show = 0
                 this.$store.dispatch(MSG, '注册成功')
+            }
+        },
+        'userInfo.id': function (val) {
+            if (val !== '') {
+                this.show = 0
             }
         }
     },
@@ -80,10 +82,10 @@ export default {
     computed: mapState({
         check: s => s.user.check,
         regStatus: s => s.user.reg,
-        loginInfo: s => s.user.login
+        userInfo: s => s.user.login
     }),
 
-    components: { InputBox }
+    components: { Notice, Myself, InputBox }
 }
 </script>
 
@@ -107,8 +109,15 @@ export default {
                         </router-link>
                     </div>
 
-                    <md-button class="md-dense" @click="show = 1">注册</md-button>
-                    <md-button class="md-dense" @click="show = 2">登录</md-button>
+                    <div v-if="userInfo.id" class="user">
+                        <Notice/>
+                        <Myself/>
+                    </div>
+                    <div v-else class="user">
+                        <md-button class="md-dense" @click="show = 1">注册</md-button>
+                        <md-button class="md-dense" @click="show = 2">登录</md-button>
+                    </div>
+
                 </md-layout>
             </md-layout>
         </md-toolbar>
@@ -186,6 +195,9 @@ export default {
 }
 .menu a {
     color: inherit !important;
+}
+.user {
+    display: flex;
 }
 .md-layout {
     align-items: center;
