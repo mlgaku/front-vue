@@ -5,6 +5,10 @@ export const RECEIVE = 'RECEIVE'
 export const CONNECT = 'CONNECT'
 export const DISCONNECT = 'DISCONNECT'
 
+// 提示
+export const MSG = 'MSG'
+export const CLEAR = 'CLEAR'
+
 // 节点
 export const NODE_ADD = 'NODE_ADD'
 

@@ -24,7 +24,7 @@ export default {
 <div id="app">
     <router-view/>
     <!-- 全局提示 -->
-    <Snackbar :msg="$store.state.msg" @close="$store.state.msg = ''"/>
+    <Snackbar :msg="$store.state.msg" @close="$store.dispatch('CLEAR')"/>
 </div>
 </template>
 

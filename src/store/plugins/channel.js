@@ -1,3 +1,4 @@
+import { MSG } from '@/store/types'
 import { Socket, Convert, Protocol } from '@/utils'
 
 const channel = socket => {
@@ -7,7 +8,7 @@ const channel = socket => {
 
             // 操作失败显示提示
             if (data.status === false) {
-                store.state.msg = data.msg
+                store.dispatch(MSG, data.msg)
                 return
             }
 

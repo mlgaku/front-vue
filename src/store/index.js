@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import modules from './modules'
 import plugins from './plugins'
 
-import * as actions from './actions'
+import actions from './actions'
 import * as getters from './getters'
 
 Vue.use(Vuex)

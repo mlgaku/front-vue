@@ -2,7 +2,7 @@
 import InputBox from './InputBox'
 import { mapState } from 'vuex'
 import { Validator } from 'vee-validate'
-import { USER_REG, USER_LOGIN, USER_CHECK, USER_CHECK_EMAIL } from '@/store/types'
+import { MSG, USER_REG, USER_LOGIN, USER_CHECK, USER_CHECK_EMAIL } from '@/store/types'
 
 import logo from '@/assets/logo.png'
 
@@ -12,9 +12,9 @@ export default {
         // 显示模态框
         show: 0,
         // 注册信息
-        regInfo: {},
+        regModel: {},
         // 登录信息
-        loginInfo: {}
+        loginModel: {}
     }),
 
     watch: {
@@ -28,6 +28,12 @@ export default {
             deep: true,
             handler: function (val) {
                 val === undefined || this.checkEmail(val)
+            }
+        },
+        regStatus: function (val) {
+            if (val === true) {
+                this.show = 0
+                this.$store.dispatch(MSG, '注册成功')
             }
         }
     },
@@ -61,10 +67,10 @@ export default {
 
     methods: {
         reg () {
-            this.validate(() => this.$store.dispatch(USER_REG, this.regInfo))
+            this.validate(() => this.$store.dispatch(USER_REG, this.regModel))
         },
         login () {
-            this.validate(() => this.$store.dispatch(USER_LOGIN, this.loginInfo))
+            this.validate(() => this.$store.dispatch(USER_LOGIN, this.loginModel))
         },
         validate (fn) {
             this.$validator.validateAll().then(() => this.errors.any() || fn())
@@ -72,7 +78,9 @@ export default {
     },
 
     computed: mapState({
-        check: s => s.user.check
+        check: s => s.user.check,
+        regStatus: s => s.user.reg,
+        loginInfo: s => s.user.login
     }),
 
     components: { InputBox }
@@ -114,7 +122,7 @@ export default {
                 <md-input
                     required
                     name="name"
-                    v-model="regInfo.name"
+                    v-model="regModel.name"
                     v-validate="'required|min:4|max:15|check_name'"/>
                 <span class="md-error" v-show="errors.has('name')">{{ errors.first('name') }}</span>
             </md-input-container>
@@ -125,7 +133,7 @@ export default {
                     required
                     name="password"
                     type="password"
-                    v-model="regInfo.password"
+                    v-model="regModel.password"
                     v-validate="'required|min:8|max:20'"/>
                 <span class="md-error" v-show="errors.has('password')">{{ errors.first('password') }}</span>
             </md-input-container>
@@ -136,7 +144,7 @@ export default {
                     required
                     name="email"
                     type="email"
-                    v-model="regInfo.email"
+                    v-model="regModel.email"
                     v-validate="'required|email|min:8|max:30|check_email'"/>
                 <span class="md-error" v-show="errors.has('email')">{{ errors.first('email') }}</span>
             </md-input-container>
@@ -151,7 +159,7 @@ export default {
                 <md-input
                     required
                     name="name"
-                    v-model="loginInfo.name"
+                    v-model="loginModel.name"
                     v-validate="'required|min:4|max:15'"/>
                 <span class="md-error" v-show="errors.has('name')">{{ errors.first('name') }}</span>
             </md-input-container>
@@ -162,7 +170,7 @@ export default {
                     required
                     name="password"
                     type="password"
-                    v-model="loginInfo.password"
+                    v-model="loginModel.password"
                     v-validate="'required|min:8|max:20'"/>
                 <span class="md-error" v-show="errors.has('password')">{{ errors.first('password') }}</span>
             </md-input-container>

@@ -2,6 +2,10 @@ import _ from 'lodash'
 import { USER_REG, USER_LOGIN, USER_CHECK, USER_CHECK_EMAIL } from '../types'
 
 const state = {
+    // 注册
+    reg: false,
+    // 登录
+    login: {},
     // 检查
     check: {
         name: true,
@@ -29,10 +33,14 @@ const actions = {
 
 const mutations = {
     [USER_REG] (state, body) {
-        // console.log(state)
+        if (body.status === true) {
+            state.reg = true
+        }
     },
     [USER_LOGIN] (state, body) {
-        // console.log(state)
+        if (body.status === true) {
+            state.login = body.data
+        }
     },
     [USER_CHECK] (state, body) {
         state.check.name = body.data
