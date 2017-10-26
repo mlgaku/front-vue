@@ -1,5 +1,11 @@
 <script>
-export default {}
+import { mapState } from 'vuex'
+
+export default {
+    computed: mapState({
+        userInfo: s => s.user.login
+    })
+}
 </script>
 
 <template>
@@ -14,8 +20,8 @@ export default {}
                 <img src="http://vuematerial.io/assets/marcosmoura.jpg">
             </md-avatar>
             <div class="card-info">
-                <span>sxyazi</span>
-                <span>sxyazi@gmail.com</span>
+                <span>{{ userInfo.name }}</span>
+                <span>{{ userInfo.email }}</span>
             </div>
         </div>
         <md-menu-item>余额</md-menu-item>

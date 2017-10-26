@@ -1,17 +1,16 @@
 import _ from 'lodash'
+import { Beat } from '@/utils'
 import { USER_REG, USER_LOGIN, USER_CHECK, USER_CHECK_EMAIL } from '../types'
 
 const state = {
-    // 注册
-    reg: false,
-    // 登录
-    login: {
-        id: 'djldshjlsfhgdfjlglhj'
-    },
-    // 检查
+    // 注册成功
+    reg: 0,
+    // 登录信息
+    login: {},
+    // 信息检查
     check: {
-        name: true,
-        email: true
+        name: 0,
+        email: 0
     }
 }
 
@@ -36,7 +35,7 @@ const actions = {
 const mutations = {
     [USER_REG] (state, body) {
         if (body.status === true) {
-            state.reg = true
+            state.reg = Beat(true)
         }
     },
     [USER_LOGIN] (state, body) {
@@ -45,10 +44,14 @@ const mutations = {
         }
     },
     [USER_CHECK] (state, body) {
-        state.check.name = body.data
+        if (body.status === true) {
+            state.check.name = Beat(body.data)
+        }
     },
     [USER_CHECK_EMAIL] (state, body) {
-        state.check.email = body.data
+        if (body.status === true) {
+            state.check.email = Beat(body.data)
+        }
     }
 }
 

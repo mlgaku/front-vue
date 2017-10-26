@@ -15,6 +15,10 @@ export const SUB_REMOVE = 'SUB_REMOVE'
 
 // 节点
 export const NODE_ADD = 'NODE_ADD'
+export const NODE_LIST = 'NODE_LIST'
+export const NODE_INFO = 'NODE_INFO'
+export const NODE_CHECK = 'NODE_CHECK'
+export const NODE_REMOVE = 'NODE_REMOVE'
 
 // 用户
 export const USER_REG = 'USER_REG'
