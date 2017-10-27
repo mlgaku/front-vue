@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import { Beat } from '@/utils'
-import { NODE_ADD, NODE_LIST, NODE_CHECK } from '../types'
+import { NODE_ADD, NODE_LIST, NODE_CHECK, NODE_REMOVE } from '../types'
 
 const state = {
     // 添加成功
@@ -8,7 +8,9 @@ const state = {
     // 节点列表
     list: [],
     // 检查节点名
-    check: 0
+    check: 0,
+    // 删除节点
+    remove: 0
 }
 
 const getters = {
@@ -29,6 +31,11 @@ const getters = {
         }
 
         return Object.values(tmp)
+    },
+
+    nodeTitle: state => id => {
+        const node = _.find(state.list, { id })
+        return node === undefined ? '加载中' : node.title
     }
 }
 
@@ -38,7 +45,10 @@ const actions = {
     },
     [NODE_CHECK]: _.debounce(({ commit }, name) => {
         commit(NODE_CHECK, { name })
-    }, 500)
+    }, 500),
+    [NODE_REMOVE] ({ commit }, id) {
+        commit(NODE_REMOVE, { id })
+    }
 }
 
 const mutations = {
@@ -55,6 +65,11 @@ const mutations = {
     [NODE_CHECK] (state, body) {
         if (body.status === true) {
             state.check = Beat(body.data)
+        }
+    },
+    [NODE_REMOVE] (state, body) {
+        if (body.status === true) {
+            state.remove = Beat(true)
         }
     }
 }

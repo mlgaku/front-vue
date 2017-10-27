@@ -3,9 +3,10 @@ import Vue from 'vue'
 
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
-
 import { Validator } from './utils'
 import Snackbar from './components/Snackbar'
+
+import { SUB_ADD, SUB_REMOVE, NODE_LIST } from './store/types'
 
 Vue.use(Validator)
 Vue.use(VueMaterial)
@@ -16,6 +17,16 @@ Vue.material.registerTheme('default', {
 })
 
 export default {
+    beforeMount () {
+        // 全局订阅
+        this.$store.dispatch(SUB_ADD, NODE_LIST)
+    },
+
+    destroyed () {
+        // 取消全局订阅
+        this.$store.dispatch(SUB_REMOVE, NODE_LIST)
+    },
+
     components: { Snackbar }
 }
 </script>
@@ -24,7 +35,7 @@ export default {
 <div id="app">
     <router-view/>
     <!-- 全局提示 -->
-    <Snackbar :msg="$store.state.msg" @close="$store.dispatch('CLEAR')"/>
+    <Snackbar :msg="$store.state.msg" @clear="$store.dispatch('CLEAR')"/>
 </div>
 </template>
 

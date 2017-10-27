@@ -1,26 +1,24 @@
 <script>
 import Card from './Card'
+import Confirm from './Confirm'
 import InputBox from './InputBox'
 
 import { Beat } from '@/utils'
 import { mapState, mapGetters } from 'vuex'
 import { Validator } from 'vee-validate'
-import { MSG, SUB_ADD, SUB_REMOVE, NODE_ADD, NODE_LIST, NODE_CHECK } from '@/store/types'
+import { MSG, NODE_ADD, NODE_CHECK, NODE_REMOVE } from '@/store/types'
 
 export default {
-    beforeMount () {
-        this.$store.dispatch(SUB_ADD, NODE_LIST)
-    },
-
-    destroyed () {
-        this.$store.dispatch(SUB_REMOVE, NODE_LIST)
-    },
-
     data: () => ({
         // 显示模态框
-        show: false,
+        show: {
+            add: false,
+            remove: false
+        },
         // 添加节点
-        nodeModel: {}
+        nodeModel: {},
+        // 删除节点ID
+        removeId: ''
     }),
 
     watch: {
@@ -29,8 +27,14 @@ export default {
         },
         addStatus: function (val) {
             if (Beat(val)) {
-                this.show = false
-                this.$store.dispatch(MSG, '添加成功')
+                this.show.add = false
+                this.$store.dispatch(MSG, '添加节点成功')
+            }
+        },
+        removeStatus: function (val) {
+            if (Beat(val)) {
+                this.show.remove = false
+                this.$store.dispatch(MSG, '删除节点成功')
             }
         }
     },
@@ -54,6 +58,10 @@ export default {
         add () {
             this.validate(() => this.$store.dispatch(NODE_ADD, this.nodeModel))
         },
+        remove () {
+            this.$store.dispatch(NODE_REMOVE, this.removeId)
+            this.removeId = ''
+        },
         validate (fn) {
             this.$validator.validateAll().then(() => this.errors.any() || fn())
         }
@@ -62,14 +70,15 @@ export default {
     computed: {
         ...mapState({
             check: s => s.node.check,
-            addStatus: s => s.node.add
+            addStatus: s => s.node.add,
+            removeStatus: s => s.node.remove
         }),
         ...mapGetters([
             'nodeList'
         ])
     },
 
-    components: { Card, InputBox }
+    components: { Card, Confirm, InputBox }
 }
 </script>
 
@@ -78,20 +87,20 @@ export default {
     <Card title="全部节点">
         共有 3 个父节点, 22 个子节点
         <div slot="oper">
-            <md-button class="md-icon-button" @click="show = true; delete nodeModel.parent">
+            <md-button class="md-icon-button" @click="show.add = true; delete nodeModel.parent">
                 <md-icon>add</md-icon>
             </md-button>
         </div>
     </Card>
-
+{{$store.state.msg}}
     <!-- 节点列表 -->
     <div>
         <Card v-for="x in nodeList" :key="x.id" :title="x.title">
             <div slot="oper">
-                <md-button class="md-icon-button">
+                <md-button class="md-icon-button" @click="removeId = x.id; show.remove = true">
                     <md-icon>remove</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" @click="show = true; nodeModel.parent = x.id">
+                <md-button class="md-icon-button" @click="nodeModel.parent = x.id; show.add = true">
                     <md-icon>add</md-icon>
                 </md-button>
             </div>
@@ -102,7 +111,7 @@ export default {
     </div>
 
     <!-- 添加节点 -->
-    <InputBox :show="show" :title="`添${nodeModel.parent ? '子' : '父'}节点`" @close="show = false" @submit="add()">
+    <InputBox :show="show.add" :title="`添${nodeModel.parent ? '子' : '父'}节点`" @close="show.add = false" @submit="add()">
         <form novalidate @submit.stop.prevent>
             <md-input-container :class="{'md-input-invalid': errors.has('name')}">
                 <label>名称</label>
@@ -125,6 +134,12 @@ export default {
             </md-input-container>
         </form>
     </InputBox>
+
+    <!-- 删除节点 -->
+    <Confirm :show="show.remove" title="确认删除" @close="show.remove = false" @submit="remove()">
+        你确定要删除这个节点么? 此操作无可挽回!
+    </Confirm>
+
 </div>
 </template>
 

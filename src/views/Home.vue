@@ -3,15 +3,7 @@ import Card from '@/components/Card'
 import Toolbar from '@/components/Toolbar'
 import TopicList from '@/components/TopicList'
 
-import { SUB_ADD, SUB_REMOVE, TOPIC_LIST } from '@/store/types'
-
 export default {
-    beforeMount () {
-        this.$store.dispatch(SUB_ADD, TOPIC_LIST)
-    },
-    destroyed () {
-        this.$store.dispatch(SUB_REMOVE, TOPIC_LIST)
-    },
     components: { Card, Toolbar, TopicList }
 }
 </script>
