@@ -111,7 +111,7 @@ export default {
     </div>
 
     <!-- 添加节点 -->
-    <InputBox :show="show.add" :title="`添${nodeModel.parent ? '子' : '父'}节点`" @close="show.add = false" @submit="add()">
+    <InputBox :show="show.add" :title="`加${nodeModel.parent ? '子' : '父'}节点`" @close="show.add = false" @submit="add()">
         <form novalidate @submit.stop.prevent>
             <md-input-container :class="{'md-input-invalid': errors.has('name')}">
                 <label>名称</label>

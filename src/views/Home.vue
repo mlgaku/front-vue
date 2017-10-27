@@ -1,10 +1,11 @@
 <script>
 import Card from '@/components/Card'
 import Toolbar from '@/components/Toolbar'
+import Shortcut from '@/components/Shortcut'
 import TopicList from '@/components/TopicList'
 
 export default {
-    components: { Card, Toolbar, TopicList }
+    components: { Card, Toolbar, Shortcut, TopicList }
 }
 </script>
 
@@ -29,6 +30,9 @@ export default {
             </md-layout>
         </md-layout>
     </md-layout>
+
+    <!-- 快捷按钮 -->
+    <Shortcut/>
 </div>
 </template>
 

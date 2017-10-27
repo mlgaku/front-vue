@@ -1,6 +1,11 @@
 <script>
 export default {
-    props: ['title']
+    props: {
+        // 标题
+        title: String,
+        // 不填充
+        nopad: Boolean
+    }
 }
 </script>
 
@@ -10,7 +15,7 @@ export default {
         <h2 class="md-title">{{title}}</h2>
         <slot name="oper"></slot>
     </md-toolbar>
-    <md-card-area>
+    <md-card-area :style="{padding: nopad ? '' : '15px'}">
         <slot/>
     </md-card-area>
 </md-card>
@@ -28,8 +33,5 @@ export default {
     min-height: 45px;
     justify-content: space-between;
     border-bottom: 1px solid #e0e0e0;
-}
-.md-card-area {
-    padding: 15px;
 }
 </style>
