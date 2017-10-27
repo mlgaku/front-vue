@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .meta {
-    padding: 15px 20px;
+    padding: 15px;
     background: #fafafa;
 }
 .meta h1 {
@@ -47,7 +47,7 @@ export default {
 }
 .body {
     margin: 5px 0;
-    padding: 15px 20px;
+    padding: 15px;
 }
 .md-whiteframe {
     margin: 20px 0;

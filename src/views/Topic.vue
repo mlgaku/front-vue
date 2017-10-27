@@ -1,6 +1,7 @@
 <script>
 import { mapState } from 'vuex'
 import { TOPIC_INFO } from '@/store/types'
+import Card from '@/components/Card'
 import Toolbar from '@/components/Toolbar'
 import TopicInfo from '@/components/TopicInfo'
 
@@ -13,7 +14,7 @@ export default {
         topicInfo: s => s.topic.info
     }),
 
-    components: { Toolbar, TopicInfo }
+    components: { Card, Toolbar, TopicInfo }
 }
 </script>
 
@@ -29,7 +30,10 @@ export default {
                     <TopicInfo :info="topicInfo"/>
                 </md-layout>
                 <md-layout md-flex="25">
-                    右侧
+                    <!-- 卡片 -->
+                    <Card title="热门节点">
+                        这里是一些测试的文字内容
+                    </Card>
                 </md-layout>
             </md-layout>
         </md-layout>
