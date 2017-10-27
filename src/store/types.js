@@ -30,3 +30,7 @@ export const USER_CHECK_EMAIL = 'USER_CHECK_EMAIL'
 export const TOPIC_NEW = 'TOPIC_NEW'
 export const TOPIC_LIST = 'TOPIC_LIST'
 export const TOPIC_INFO = 'TOPIC_INFO'
+
+// 回复
+export const REPLY_NEW = 'REPLY_NEW'
+export const REPLY_LIST = 'REPLY_LIST'

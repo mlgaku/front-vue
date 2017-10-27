@@ -26,7 +26,7 @@ export default {
             <h1>{{ info.title }}</h1>
             <span>{{ info.user.name }} • {{ nodeTitle(info.node) }} • {{ info.date }} • {{ info.views }} 次查看 • {{ info.replies }} 条回复</span>
         </div>
-        <div class="body">
+        <div class="body" v-if="info.content">
             <Marked :content="info.content"/>
         </div>
     </div>
@@ -50,6 +50,7 @@ export default {
     padding: 15px;
 }
 .md-whiteframe {
+    width: 100%;
     margin: 20px 0;
     background: white;
 }

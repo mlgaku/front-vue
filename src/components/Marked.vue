@@ -24,7 +24,6 @@ export default {
 .markdown-body {
     color: #444;
     width: 100%;
-    padding: 8px;
     font-size: 14px;
     overflow-y: auto;
     line-height: 1.8;

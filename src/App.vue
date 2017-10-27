@@ -40,11 +40,11 @@ export default {
 </template>
 
 <style>
-html, body {
-    height: 100%;
+html {
+    height: auto;
+    min-height: 100%;
 }
 #app {
-    height: 100%;
     background: #f1f1f1;
 }
 

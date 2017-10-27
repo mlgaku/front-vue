@@ -23,24 +23,24 @@ export default {
 </script>
 
 <template>
-    <md-whiteframe md-elevation="2">
-        <md-list class="custom-list md-triple-line">
-            <md-list-item v-for="x in topicList" :key="x.id">
-                <md-avatar>
-                    <img src="https://placeimg.com/40/40/people/1" alt="People">
-                </md-avatar>
+<md-whiteframe md-elevation="2">
+    <md-list class="custom-list md-triple-line">
+        <md-list-item v-for="x in topicList" :key="x.id">
+            <md-avatar>
+                <img src="https://placeimg.com/40/40/people/1" alt="People">
+            </md-avatar>
 
-                <div class="md-list-text-container">
-                    <router-link :to="`/topic/${x.id}`">{{ x.title }}</router-link>
-                    <p>{{ nodeTitle(x.node) }}  •  {{ x.user.name }}  •  {{ x.date }}  {{ x.last_reply ? `•  最后回复来自 ${x.last_reply}` : '' }}</p>
-                </div>
+            <div class="md-list-text-container">
+                <router-link :to="`/topic/${x.id}`">{{ x.title }}</router-link>
+                <p>{{ nodeTitle(x.node) }}  •  {{ x.user.name }}  •  {{ x.date }}  {{ x.last_reply ? `•  最后回复来自 ${x.last_reply}` : '' }}</p>
+            </div>
 
-                <md-button class="md-icon-button">{{ x.replies }}</md-button>
+            <md-button class="md-icon-button">{{ x.replies }}</md-button>
 
-                <md-divider class="md-inset"></md-divider>
-            </md-list-item>
-        </md-list>
-    </md-whiteframe>
+            <md-divider class="md-inset"></md-divider>
+        </md-list-item>
+    </md-list>
+</md-whiteframe>
 </template>
 
 <style scoped>

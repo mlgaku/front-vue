@@ -4,17 +4,23 @@ import { TOPIC_INFO } from '@/store/types'
 import Card from '@/components/Card'
 import Toolbar from '@/components/Toolbar'
 import TopicInfo from '@/components/TopicInfo'
+import ReplyList from '@/components/ReplyList'
 
 export default {
     beforeMount () {
-        this.$store.dispatch(TOPIC_INFO, this.$route.params.id)
+        this.$store.dispatch(TOPIC_INFO, this.topicId)
     },
 
-    computed: mapState({
-        topicInfo: s => s.topic.info
-    }),
+    computed: {
+        topicId () {
+            return this.$route.params.id
+        },
+        ...mapState({
+            topicInfo: s => s.topic.info
+        })
+    },
 
-    components: { Card, Toolbar, TopicInfo }
+    components: { Card, Toolbar, TopicInfo, ReplyList }
 }
 </script>
 
@@ -27,7 +33,11 @@ export default {
         <md-layout md-flex="65">
             <md-layout class="main" md-gutter="16">
                 <md-layout md-flex="75">
+                    <!-- 主题信息 -->
                     <TopicInfo :info="topicInfo"/>
+                    <!-- 回复列表 -->
+                    <ReplyList :tid="topicId"/>
+                    <!-- 回复主题 -->
                 </md-layout>
                 <md-layout md-flex="25">
                     <!-- 卡片 -->
