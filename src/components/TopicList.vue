@@ -6,9 +6,11 @@ export default {
     beforeMount () {
         this.$store.dispatch(SUB_ADD, TOPIC_LIST)
     },
+
     destroyed () {
         this.$store.dispatch(SUB_REMOVE, TOPIC_LIST)
     },
+
     computed: {
         ...mapState({
             topicList: s => s.topic.list
@@ -29,7 +31,7 @@ export default {
                 </md-avatar>
 
                 <div class="md-list-text-container">
-                    <span>{{ x.title }}</span>
+                    <router-link :to="`/topic/${x.id}`">{{ x.title }}</router-link>
                     <p>{{ nodeTitle(x.node) }}  •  {{ x.user.name }}  •  {{ x.date }}  {{ x.last_reply ? `•  最后回复来自 ${x.last_reply}` : '' }}</p>
                 </div>
 
@@ -62,5 +64,9 @@ export default {
 }
 .md-list-text-container p {
     margin-top: 10px;
+}
+.md-list-text-container > a,
+.md-list-text-container > a:hover {
+    color: rgba(0, 0, 0, .87);
 }
 </style>

@@ -92,7 +92,7 @@ export default {
             </md-button>
         </div>
     </Card>
-{{$store.state.msg}}
+
     <!-- 节点列表 -->
     <div>
         <Card v-for="x in nodeList" :key="x.id" :title="x.title">

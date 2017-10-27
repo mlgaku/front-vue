@@ -1,8 +1,7 @@
 <script>
-import Marked from 'marked'
-import Codemirror from 'codemirror'
+import Marked from './Marked'
 
-import 'github-markdown-css'
+import Codemirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 
 import 'codemirror/mode/javascript/javascript'
@@ -49,34 +48,28 @@ export default {
     },
 
     computed: {
-        preview () {
-            return Marked(this.content, { sanitize: true })
-        },
         maxHeight () {
             return this.height || '450px'
         }
-    }
+    },
+
+    components: { Marked }
 }
 </script>
 
 <template>
 <md-layout>
-    <md-layout>
+    <md-layout class="editor">
         <textarea ref="editor"></textarea>
     </md-layout>
     <md-layout :style="{'max-height': maxHeight}">
-        <div v-html="preview" class="preview markdown-body"></div>
+        <Marked :content="content"/>
     </md-layout>
 </md-layout>
 </template>
 
 <style scoped>
-.preview {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    background: white;
-    border-left: 1px solid #e0e0e0;
-    overflow-y: auto;
+.editor {
+    border-right: 1px solid #e0e0e0;
 }
 </style>
