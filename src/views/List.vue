@@ -34,7 +34,6 @@ export default {
                 <md-layout md-flex="75">
                     <!-- 节点信息 -->
                     <NodeInfo :info="info"/>
-
                     <!-- 主题列表 -->
                     <TopicList :node="info.id"/>
                 </md-layout>

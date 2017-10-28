@@ -6,6 +6,7 @@ export default {
         // 节点信息
         info: Object
     },
+
     computed: {
         ...mapGetters([
             'nodeTitle'

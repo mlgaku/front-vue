@@ -34,3 +34,7 @@ export const TOPIC_INFO = 'TOPIC_INFO'
 // 回复
 export const REPLY_NEW = 'REPLY_NEW'
 export const REPLY_LIST = 'REPLY_LIST'
+
+// 通知
+export const NOTICE_LIST = 'NOTICE_LIST'
+export const NOTICE_REMOVE = 'NOTICE_REMOVE'

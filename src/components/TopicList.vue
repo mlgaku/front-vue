@@ -20,10 +20,6 @@ export default {
         }
     },
 
-    destroyed () {
-        this.$store.dispatch(SUB_REMOVE, TOPIC_LIST)
-    },
-
     computed: {
         ...mapState({
             topicList: s => s.topic.list
@@ -31,6 +27,10 @@ export default {
         ...mapGetters([
             'nodeTitle'
         ])
+    },
+
+    destroyed () {
+        this.$store.dispatch(SUB_REMOVE, TOPIC_LIST)
     }
 }
 </script>

@@ -1,5 +1,36 @@
 <script>
-export default {}
+import { Beat } from '@/utils'
+import { mapState } from 'vuex'
+import { MSG, SUB_ADD, SUB_REMOVE, NOTICE_LIST, NOTICE_REMOVE } from '@/store/types'
+
+export default {
+    watch: {
+        removeStatus (val) {
+            if (Beat(val)) {
+                this.$store.dispatch(MSG, '删除通知成功')
+            }
+        }
+    },
+
+    methods: {
+        remove (id) {
+            this.$store.dispatch(NOTICE_REMOVE, id)
+        }
+    },
+
+    computed: mapState({
+        noticeList: s => s.notice.list,
+        removeStatus: s => s.notice.remove
+    }),
+
+    beforeMount () {
+        this.$store.dispatch(SUB_ADD, NOTICE_LIST)
+    },
+
+    destroyed () {
+        this.$store.dispatch(SUB_REMOVE, NOTICE_LIST)
+    }
+}
 </script>
 
 <template>
@@ -10,39 +41,14 @@ export default {}
 
     <md-menu-content class="notice">
         <div class="card">通知</div>
-        <md-menu-item>
-            <div class="text">sxyazi 在主题 <a href="#">无奈,感慨一下,中国程序员的普遍平均网络知识(技能)可能在世界前列</a> 中 At 了你</div>
-            <md-button class="md-icon-button">
-                <md-icon>delete</md-icon>
-            </md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <div class="text">sxyazi 在主题 <a href="#">无奈,感慨一下,中国程序员的普遍平均网络知识(技能)可能在世界前列</a> 中 At 了你</div>
-            <md-button class="md-icon-button">
-                <md-icon>delete</md-icon>
-            </md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <div class="text">sxyazi 在主题 <a href="#">无奈,感慨一下,中国程序员的普遍平均网络知识(技能)可能在世界前列</a> 中 At 了你</div>
-            <md-button class="md-icon-button">
-                <md-icon>delete</md-icon>
-            </md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <div class="text">sxyazi 在主题 <a href="#">无奈,感慨一下,中国程序员的普遍平均网络知识(技能)可能在世界前列</a> 中 At 了你</div>
-            <md-button class="md-icon-button">
-                <md-icon>delete</md-icon>
-            </md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <div class="text">sxyazi 在主题 <a href="#">无奈,感慨一下,中国程序员的普遍平均网络知识(技能)可能在世界前列</a> 中 At 了你</div>
-            <md-button class="md-icon-button">
-                <md-icon>delete</md-icon>
-            </md-button>
-        </md-menu-item>
-        <md-menu-item>
-            <div class="text">sxyazi 在主题 <a href="#">无奈,感慨一下,中国程序员的普遍平均网络知识(技能)可能在世界前列</a> 中 At 了你</div>
-            <md-button class="md-icon-button">
+        <md-menu-item v-for="x in noticeList" :key="x.id">
+            <div class="text" v-if="x.type == 1">
+                {{ x.user }} 回复了你的主题 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }}</router-link>
+            </div>
+            <div class="text" v-if="x.type == 2">
+                {{ x.user }} 在主题 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }}</router-link> 中 At 了你
+            </div>
+            <md-button class="md-icon-button" @click="remove(x.id)">
                 <md-icon>delete</md-icon>
             </md-button>
         </md-menu-item>
