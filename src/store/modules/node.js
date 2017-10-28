@@ -33,6 +33,10 @@ const getters = {
         return Object.values(tmp)
     },
 
+    nodeInfo: state => arr => {
+        return _.find(state.list, arr) || {}
+    },
+
     nodeTitle: state => id => {
         const node = _.find(state.list, { id })
         return node === undefined ? '加载中' : node.title

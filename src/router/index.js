@@ -4,8 +4,8 @@ import Router from 'vue-router'
 import New from '@/views/New'
 import Home from '@/views/Home'
 import Node from '@/views/Node'
-import List from '@/views/List'
 import Rank from '@/views/Rank'
+import List from '@/views/List'
 import Topic from '@/views/Topic'
 
 Vue.use(Router)
@@ -26,12 +26,12 @@ export default new Router({
             component: Node
         },
         {
-            path: '/list',
-            component: List
-        },
-        {
             path: '/rank',
             component: Rank
+        },
+        {
+            path: '/node/:name',
+            component: List
         },
         {
             path: '/topic/:id',

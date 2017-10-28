@@ -3,8 +3,21 @@ import { mapState, mapGetters } from 'vuex'
 import { SUB_ADD, SUB_REMOVE, TOPIC_LIST } from '@/store/types'
 
 export default {
-    beforeMount () {
-        this.$store.dispatch(SUB_ADD, TOPIC_LIST)
+    props: {
+        // 节点ID
+        node: String
+    },
+
+    watch: {
+        node: {
+            handler (val) {
+                this.$store.dispatch(SUB_ADD, {
+                    type: TOPIC_LIST,
+                    body: { node: val }
+                })
+            },
+            immediate: true
+        }
     },
 
     destroyed () {
