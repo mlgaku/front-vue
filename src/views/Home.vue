@@ -26,12 +26,6 @@ export default {
                     <Card title="热门节点">
                         这里是一些测试的文字内容
                     </Card>
-                    <Card title="热门节点">
-                        这里是一些测试的文字内容
-                    </Card>
-                    <Card title="热门节点">
-                        这里是一些测试的文字内容
-                    </Card>
                 </md-layout>
             </md-layout>
         </md-layout>

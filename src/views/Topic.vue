@@ -1,10 +1,12 @@
 <script>
-import { mapState } from 'vuex'
-import { TOPIC_INFO } from '@/store/types'
 import Card from '@/components/Card'
+import Reply from '@/components/Reply'
 import Toolbar from '@/components/Toolbar'
 import TopicInfo from '@/components/TopicInfo'
 import ReplyList from '@/components/ReplyList'
+
+import { mapState } from 'vuex'
+import { TOPIC_INFO } from '@/store/types'
 
 export default {
     beforeMount () {
@@ -20,7 +22,7 @@ export default {
         })
     },
 
-    components: { Card, Toolbar, TopicInfo, ReplyList }
+    components: { Card, Reply, Toolbar, TopicInfo, ReplyList }
 }
 </script>
 
@@ -38,6 +40,7 @@ export default {
                     <!-- 回复列表 -->
                     <ReplyList :tid="topicId"/>
                     <!-- 回复主题 -->
+                    <Reply :tid="topicId"/>
                 </md-layout>
                 <md-layout md-flex="25">
                     <!-- 卡片 -->

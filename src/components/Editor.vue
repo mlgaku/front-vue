@@ -59,17 +59,17 @@ export default {
 
 <template>
 <md-layout>
-    <md-layout class="editor">
+    <md-layout>
         <textarea ref="editor"></textarea>
     </md-layout>
     <md-layout :style="{'max-height': maxHeight}">
-        <Marked padding="8px" :content="content"/>
+        <Marked padding="5px" :content="content"/>
     </md-layout>
 </md-layout>
 </template>
 
 <style scoped>
-.editor {
+.md-layout > .md-layout:nth-child(1) {
     border-right: 1px solid #e0e0e0;
 }
 </style>
