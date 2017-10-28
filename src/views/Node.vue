@@ -101,8 +101,8 @@ export default {
                     </Card>
                     <!-- 节点列表 -->
                     <NodeList
-                        @add="id => { nodeModel.parent = id; show.add = true }"
-                        @remove="id => { removeId = id; show.remove = true }"/>
+                        @add="nodeModel.parent = arguments[0]; show.add = true"
+                        @remove="removeId = arguments[0]; show.remove = true"/>
                 </md-layout>
                 <md-layout md-flex="25">
                     <!-- 卡片 -->

@@ -1,4 +1,5 @@
 <script>
+import _ from 'lodash'
 import Marked from './Marked'
 
 import Codemirror from 'codemirror'
@@ -11,9 +12,6 @@ import 'codemirror/mode/php/php'
 
 export default {
     data: () => ({
-        // 内容
-        content: '',
-        // Codemirror
         codemirror: null
     }),
 
@@ -28,6 +26,29 @@ export default {
         linewrap: Boolean
     },
 
+    watch: {
+        value (val) {
+            if (val && val !== _.trim(this.codemirror.getValue())) {
+                this.codemirror.setValue(val)
+            }
+        }
+    },
+
+    methods: {
+        change (cm) {
+            this.$emit('input', cm.getValue())
+        }
+    },
+
+    computed: {
+        content () {
+            return this.value || ''
+        },
+        maxHeight () {
+            return this.height || '450px'
+        }
+    },
+
     mounted () {
         this.codemirror = Codemirror.fromTextArea(this.$refs.editor, {
             mode: 'markdown',
@@ -37,20 +58,6 @@ export default {
         })
         this.codemirror.on('change', this.change)
         this.codemirror.setSize('100%', this.maxHeight)
-        this.codemirror.setValue(this.value || '')
-    },
-
-    methods: {
-        change (cm) {
-            this.content = cm.getValue()
-            this.$emit('input', this.content)
-        }
-    },
-
-    computed: {
-        maxHeight () {
-            return this.height || '450px'
-        }
     },
 
     components: { Marked }
