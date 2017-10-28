@@ -1,5 +1,6 @@
 <script>
 import Marked from 'marked'
+import Prism from '@/utils/Prism'
 import 'github-markdown-css'
 
 export default {
@@ -12,6 +13,9 @@ export default {
 
     computed: {
         compiled () {
+            this.$nextTick(() => {
+                Prism.highlightAll()
+            })
             return Marked(this.content, { sanitize: true })
         }
     }
@@ -22,13 +26,16 @@ export default {
 <div v-html="compiled" class="markdown-body" :style="{padding: padding}"></div>
 </template>
 
-<style scoped>
+<style>
 .markdown-body {
     color: #444;
     width: 100%;
-    font-size: 14px;
     overflow-y: auto;
     line-height: 1.8;
     background: white;
+}
+.markdown-body code[class*="language-"] {
+    color: inherit;
+    background-color: transparent;
 }
 </style>

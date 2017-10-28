@@ -39,7 +39,7 @@ export default {
     background: #fafafa;
 }
 .meta h1 {
-    font-size: 25px;
+    font-size: 26px;
 }
 .meta span {
     color: gray;
