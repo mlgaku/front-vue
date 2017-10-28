@@ -63,7 +63,7 @@ export default {
         <textarea ref="editor"></textarea>
     </md-layout>
     <md-layout :style="{'max-height': maxHeight}">
-        <Marked :content="content"/>
+        <Marked padding="8px" :content="content"/>
     </md-layout>
 </md-layout>
 </template>

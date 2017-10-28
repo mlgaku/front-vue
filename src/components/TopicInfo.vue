@@ -51,7 +51,6 @@ export default {
 }
 .md-whiteframe {
     width: 100%;
-    margin: 20px 0;
     background: white;
 }
 </style>

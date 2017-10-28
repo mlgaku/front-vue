@@ -46,7 +46,6 @@ export default {
 <style scoped>
 .md-whiteframe {
     width: 100%;
-    margin: 20px 0;
 }
 .md-icon-button {
     padding: 0;

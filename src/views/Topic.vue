@@ -55,4 +55,11 @@ export default {
 .main {
     align-items: flex-start;
 }
+.main > .md-layout {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.main .md-layout > * + * {
+    margin-top: 20px;
+}
 </style>

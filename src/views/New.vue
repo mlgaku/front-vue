@@ -42,7 +42,7 @@ export default {
     <Toolbar/>
 
     <md-layout md-align="center">
-        <md-layout md-flex="65">
+        <md-layout class="main" md-flex="65">
             <Card title="发表主题" nopad>
                 <form novalidate @submit.stop.prevent="submit()">
                     <!-- 标题 -->
@@ -74,6 +74,10 @@ export default {
 </template>
 
 <style scoped>
+.main {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 .title {
     width: 100%;
     display: block;
@@ -98,5 +102,8 @@ export default {
 .submit .md-layout {
     flex: none;
     min-width: auto;
+}
+.markdown-body {
+    background: red;
 }
 </style>

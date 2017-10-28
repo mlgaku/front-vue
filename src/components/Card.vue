@@ -24,7 +24,6 @@ export default {
 <style scoped>
 .md-card {
     width: 100%;
-    margin: 20px 0;
 }
 .md-title {
     font-size: 16px;

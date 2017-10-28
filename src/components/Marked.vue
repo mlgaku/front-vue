@@ -4,6 +4,8 @@ import 'github-markdown-css'
 
 export default {
     props: {
+        // 填充
+        padding: String,
         // 原内容
         content: String
     },
@@ -17,7 +19,7 @@ export default {
 </script>
 
 <template>
-<div v-html="compiled" class="markdown-body"></div>
+<div v-html="compiled" class="markdown-body" :style="{padding: padding}"></div>
 </template>
 
 <style scoped>
