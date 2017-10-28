@@ -38,7 +38,9 @@ export default {
 
             <div class="md-list-text-container">
                 <router-link :to="`/user/${x.user.name}`">{{ x.user.name }}</router-link>
-                <Marked :content="x.content"/>
+                <div class="content">
+                    <Marked :content="x.content"/>
+                </div>
             </div>
 
             <md-button class="md-icon-button">{{ x.replies }}</md-button>
@@ -50,7 +52,13 @@ export default {
 </template>
 
 <style scoped>
+.content {
+    margin-top: 3px;
+}
 .md-whiteframe {
     width: 100%;
+}
+.md-list-text-container {
+    align-items: flex-start;
 }
 </style>

@@ -11,12 +11,41 @@ export default {
         content: String
     },
 
+    methods: {
+        render () {
+            const html = Marked(this.content)
+            return html.replace(/@([a-zA-Z0-9]+)/, '@<at>$1</at>')
+        }
+    },
+
+    created () {
+        const renderer = new Marked.Renderer()
+        renderer.html = html => {
+            console.log(html)
+        }
+
+        Marked.setOptions({
+            breaks: true,
+            sanitize: true,
+            renderer: renderer
+        })
+    },
+
     computed: {
         compiled () {
             this.$nextTick(() => {
+                // 高亮
                 Prism.highlightAll()
+
+                // at
+                document.querySelectorAll('at').forEach(x => {
+                    x.onclick = e => {
+                        this.$router.push({ path: `/user/${e.target.innerHTML}` })
+                    }
+                })
             })
-            return Marked(this.content, { sanitize: true })
+
+            return this.render()
         }
     }
 }
@@ -27,6 +56,12 @@ export default {
 </template>
 
 <style>
+at {
+    cursor: pointer;
+}
+at:hover {
+    text-decoration: underline;
+}
 .markdown-body {
     color: #444;
     width: 100%;
