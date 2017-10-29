@@ -1,16 +1,9 @@
 <script>
-import Toolbar from '@/components/Toolbar'
-
-export default {
-    components: { Toolbar }
-}
+export default {}
 </script>
 
 <template>
 <div>
-    <!-- 头部 -->
-    <Toolbar/>
-
     <md-layout md-align="center">
         <md-layout md-flex="65">
             <md-layout class="main" md-gutter="16">

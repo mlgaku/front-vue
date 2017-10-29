@@ -1,10 +1,19 @@
 <script>
 import { mapState } from 'vuex'
+import { SUB_ADD, SUB_REMOVE, USER_INFO } from '@/store/types'
 
 export default {
     computed: mapState({
-        userInfo: s => s.user.login
-    })
+        userInfo: s => s.user.info
+    }),
+
+    beforeMount () {
+        this.$store.dispatch(SUB_ADD, USER_INFO)
+    },
+
+    destroyed () {
+        this.$store.dispatch(SUB_REMOVE, USER_INFO)
+    }
 }
 </script>
 
@@ -25,7 +34,9 @@ export default {
             </div>
         </div>
         <md-menu-item>余额</md-menu-item>
-        <md-menu-item>设置</md-menu-item>
+        <router-link to="/setting">
+            <md-menu-item>设置</md-menu-item>
+        </router-link>
         <md-menu-item>退出</md-menu-item>
     </md-menu-content>
 </md-menu>
@@ -70,5 +81,10 @@ export default {
 .card-info span:nth-child(2) {
     font-size: 13px;
     color: rgba(0, 0, 0, 0.87);
+}
+.md-menu-content a,
+.md-menu-content a:hover {
+    color: inherit;
+    text-decoration: none;
 }
 </style>

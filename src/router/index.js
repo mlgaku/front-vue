@@ -7,6 +7,7 @@ import Node from '@/views/Node'
 import Rank from '@/views/Rank'
 import List from '@/views/List'
 import Topic from '@/views/Topic'
+import Setting from '@/views/Setting'
 
 Vue.use(Router)
 
@@ -28,6 +29,10 @@ export default new Router({
         {
             path: '/rank',
             component: Rank
+        },
+        {
+            path: '/setting',
+            component: Setting
         },
         {
             path: '/node/:name',

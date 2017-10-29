@@ -4,8 +4,9 @@ import Vue from 'vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 import { Validator } from './utils'
-import Snackbar from './components/Snackbar'
 
+import Toolbar from '@/components/Toolbar'
+import Snackbar from './components/Snackbar'
 import { SUB_ADD, SUB_REMOVE, NODE_LIST } from './store/types'
 
 Vue.use(Validator)
@@ -27,12 +28,15 @@ export default {
         this.$store.dispatch(SUB_REMOVE, NODE_LIST)
     },
 
-    components: { Snackbar }
+    components: { Toolbar, Snackbar }
 }
 </script>
 
 <template>
 <div id="app">
+    <!-- 导航条 -->
+    <Toolbar/>
+    <!-- 内容 -->
     <router-view/>
     <!-- 全局提示 -->
     <Snackbar :msg="$store.state.msg" @clear="$store.dispatch('CLEAR')"/>

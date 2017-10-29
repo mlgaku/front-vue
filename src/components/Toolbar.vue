@@ -34,8 +34,8 @@ export default {
                 this.$store.dispatch(MSG, '注册成功')
             }
         },
-        'userInfo.id': function (val) {
-            if (val !== '') {
+        loginStatus: function (val) {
+            if (Beat(val)) {
                 this.show = 0
             }
         }
@@ -54,7 +54,6 @@ export default {
             },
             getMessage: (field, params, data) => (data && data.message) || undefined
         })
-
         // 检查邮箱地址
         Validator.extend('user_email', {
             validate: value => {
@@ -84,7 +83,7 @@ export default {
     computed: mapState({
         check: s => s.user.check,
         regStatus: s => s.user.reg,
-        userInfo: s => s.user.login
+        loginStatus: s => s.user.login
     }),
 
     components: { Notice, Myself, InputBox }
@@ -111,7 +110,7 @@ export default {
                         </router-link>
                     </div>
 
-                    <div v-if="userInfo.id" class="user">
+                    <div v-if="loginStatus > 0" class="user">
                         <Notice/>
                         <Myself/>
                     </div>

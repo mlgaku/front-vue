@@ -1,6 +1,5 @@
 <script>
 import Card from '@/components/Card'
-import Toolbar from '@/components/Toolbar'
 import Confirm from '@/components/Confirm'
 import InputBox from '@/components/InputBox'
 import NodeList from '@/components/NodeList'
@@ -77,15 +76,12 @@ export default {
         })
     },
 
-    components: { Card, Toolbar, Confirm, InputBox, NodeList }
+    components: { Card, Confirm, InputBox, NodeList }
 }
 </script>
 
 <template>
 <div>
-    <!-- 头部 -->
-    <Toolbar/>
-
     <md-layout md-align="center">
         <md-layout md-flex="65">
             <md-layout class="main" md-gutter="16">

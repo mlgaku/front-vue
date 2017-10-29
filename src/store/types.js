@@ -23,8 +23,12 @@ export const NODE_REMOVE = 'NODE_REMOVE'
 // 用户
 export const USER_REG = 'USER_REG'
 export const USER_LOGIN = 'USER_LOGIN'
+export const USER_INFO = 'USER_INFO'
 export const USER_CHECK = 'USER_CHECK'
 export const USER_CHECK_EMAIL = 'USER_CHECK_EMAIL'
+export const USER_AVATAR = 'USER_AVATAR'
+export const USER_SET_AVATAR = 'USER_SET_AVATAR'
+export const USER_REMOVE_AVATAR = 'USER_REMOVE_AVATAR'
 
 // 主题
 export const TOPIC_NEW = 'TOPIC_NEW'

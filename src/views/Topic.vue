@@ -1,7 +1,6 @@
 <script>
 import Card from '@/components/Card'
 import Reply from '@/components/Reply'
-import Toolbar from '@/components/Toolbar'
 import TopicInfo from '@/components/TopicInfo'
 import ReplyList from '@/components/ReplyList'
 
@@ -22,15 +21,12 @@ export default {
         })
     },
 
-    components: { Card, Reply, Toolbar, TopicInfo, ReplyList }
+    components: { Card, Reply, TopicInfo, ReplyList }
 }
 </script>
 
 <template>
 <div>
-    <!-- 头部 -->
-    <Toolbar/>
-
     <md-layout md-align="center">
         <md-layout md-flex="65">
             <md-layout class="main" md-gutter="16">

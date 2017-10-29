@@ -1,6 +1,5 @@
 <script>
 import Card from '@/components/Card'
-import Toolbar from '@/components/Toolbar'
 import Shortcut from '@/components/Shortcut'
 import NodeInfo from '@/components/NodeInfo'
 import TopicList from '@/components/TopicList'
@@ -19,15 +18,12 @@ export default {
         ])
     },
 
-    components: { Card, Toolbar, Shortcut, NodeInfo, TopicList }
+    components: { Card, Shortcut, NodeInfo, TopicList }
 }
 </script>
 
 <template>
 <div>
-    <!-- 头部 -->
-    <Toolbar/>
-
     <md-layout md-align="center">
         <md-layout md-flex="65">
             <md-layout class="main" md-gutter="16">

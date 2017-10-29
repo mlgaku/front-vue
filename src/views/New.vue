@@ -1,7 +1,6 @@
 <script>
 import Card from '@/components/Card'
 import Editor from '@/components/Editor'
-import Toolbar from '@/components/Toolbar'
 
 import { mapState } from 'vuex'
 import { MSG, TOPIC_NEW } from '@/store/types'
@@ -32,15 +31,12 @@ export default {
         newStatus: s => s.topic.new
     }),
 
-    components: { Card, Editor, Toolbar }
+    components: { Card, Editor }
 }
 </script>
 
 <template>
 <div>
-    <!-- 头部 -->
-    <Toolbar/>
-
     <md-layout md-align="center">
         <md-layout class="main" md-flex="65">
             <Card title="发表主题" nopad>

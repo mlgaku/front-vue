@@ -1,10 +1,9 @@
 <script>
 import Card from '@/components/Card'
-import Shortcut from '@/components/Shortcut'
-import TopicList from '@/components/TopicList'
+import UserInfo from '@/components/UserInfo'
 
 export default {
-    components: { Card, Shortcut, TopicList }
+    components: { Card, UserInfo }
 }
 </script>
 
@@ -14,8 +13,7 @@ export default {
         <md-layout md-flex="65">
             <md-layout class="main" md-gutter="16">
                 <md-layout md-flex="75">
-                    <!-- 列表 -->
-                    <TopicList/>
+                    <UserInfo/>
                 </md-layout>
                 <md-layout md-flex="25">
                     <!-- 卡片 -->
@@ -26,9 +24,6 @@ export default {
             </md-layout>
         </md-layout>
     </md-layout>
-
-    <!-- 快捷按钮 -->
-    <Shortcut/>
 </div>
 </template>
 
