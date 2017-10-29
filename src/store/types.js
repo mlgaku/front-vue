@@ -13,6 +13,9 @@ export const DISCONNECT = 'DISCONNECT'
 export const SUB_ADD = 'SUB_ADD'
 export const SUB_REMOVE = 'SUB_REMOVE'
 
+// 站点
+export const SITE_STATE = 'SITE_STATE'
+
 // 节点
 export const NODE_ADD = 'NODE_ADD'
 export const NODE_LIST = 'NODE_LIST'

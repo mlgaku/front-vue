@@ -1,5 +1,5 @@
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import { SUB_ADD, SUB_REMOVE, TOPIC_LIST } from '@/store/types'
 
 export default {
@@ -21,11 +21,9 @@ export default {
     },
 
     computed: {
-        ...mapState({
-            topicList: s => s.topic.list
-        }),
         ...mapGetters([
-            'nodeTitle'
+            'nodeTitle',
+            'topicList'
         ])
     },
 
@@ -40,7 +38,7 @@ export default {
     <md-list class="custom-list md-triple-line">
         <md-list-item v-for="x in topicList" :key="x.id">
             <md-avatar>
-                <img src="https://placeimg.com/40/40/people/1" alt="People">
+                <img :src="x.user.avatar">
             </md-avatar>
 
             <div class="md-list-text-container">

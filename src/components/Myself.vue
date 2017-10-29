@@ -1,11 +1,11 @@
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import { SUB_ADD, SUB_REMOVE, USER_INFO } from '@/store/types'
 
 export default {
-    computed: mapState({
-        userInfo: s => s.user.info
-    }),
+    computed: mapGetters([
+        'userInfo'
+    ]),
 
     beforeMount () {
         this.$store.dispatch(SUB_ADD, USER_INFO)
@@ -20,13 +20,13 @@ export default {
 <template>
 <md-menu md-size="4" md-direction="bottom left" md-align-trigger ref="menu">
     <md-button class="md-icon-button" md-menu-trigger>
-        <img src="http://vuematerial.io/assets/marcosmoura.jpg">
+        <img :src="userInfo.avatar">
     </md-button>
 
     <md-menu-content>
         <div class="card">
             <md-avatar>
-                <img src="http://vuematerial.io/assets/marcosmoura.jpg">
+                <img :src="userInfo.avatar">
             </md-avatar>
             <div class="card-info">
                 <span>{{ userInfo.name }}</span>

@@ -7,7 +7,7 @@ import { Validator } from './utils'
 
 import Toolbar from '@/components/Toolbar'
 import Snackbar from './components/Snackbar'
-import { SUB_ADD, SUB_REMOVE, NODE_LIST } from './store/types'
+import { SUB_ADD, SUB_REMOVE, SITE_STATE, NODE_LIST } from './store/types'
 
 Vue.use(Validator)
 Vue.use(VueMaterial)
@@ -19,6 +19,9 @@ Vue.material.registerTheme('default', {
 
 export default {
     beforeMount () {
+        // 站点信息
+        this.$store.dispatch(SITE_STATE)
+
         // 全局订阅
         this.$store.dispatch(SUB_ADD, NODE_LIST)
     },

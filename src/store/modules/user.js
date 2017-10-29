@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { Beat } from '@/utils'
+import { Beat, Draw } from '@/utils'
 import {
     USER_REG, USER_LOGIN, USER_INFO,
     USER_CHECK, USER_CHECK_EMAIL,
@@ -34,6 +34,10 @@ const state = {
 }
 
 const getters = {
+    userInfo: (state, getters) => ({
+        ...state.info,
+        ...{ avatar: state.info.avatar ? getters.avatarURL(state.info.name) : Draw(state.info.name) }
+    })
 }
 
 const actions = {

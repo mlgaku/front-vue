@@ -1,3 +1,4 @@
+import { Draw } from '@/utils'
 import { TOPIC_NEW, TOPIC_LIST, TOPIC_INFO } from '../types'
 
 const state = {
@@ -10,6 +11,13 @@ const state = {
 }
 
 const getters = {
+    topicList: (state, getters) => state.list.map(x => ({
+        ...x,
+        user: {
+            ...x.user,
+            avatar: x.user.avatar ? getters.avatarURL(x.user.name) : Draw(x.user.name)
+        }
+    }))
 }
 
 const actions = {

@@ -1,6 +1,6 @@
 <script>
 import Marked from './Marked'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import { SUB_ADD, SUB_REMOVE, REPLY_LIST } from '@/store/types'
 
 export default {
@@ -20,9 +20,9 @@ export default {
         tid: String
     },
 
-    computed: mapState({
-        replyList: s => s.reply.list
-    }),
+    computed: mapGetters([
+        'replyList'
+    ]),
 
     components: { Marked }
 }
@@ -33,7 +33,7 @@ export default {
     <md-list class="custom-list md-triple-line">
         <md-list-item v-for="x in replyList" :key="x.id">
             <md-avatar>
-                <img src="https://placeimg.com/40/40/people/1" alt="People">
+                <img :src="x.user.avatar">
             </md-avatar>
 
             <div class="md-list-text-container">

@@ -2,7 +2,7 @@
 import Card from './Card'
 
 import { Beat } from '@/utils'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { MSG, USER_AVATAR, USER_SET_AVATAR } from '@/store/types'
 
 export default {
@@ -91,9 +91,11 @@ export default {
             return this.userInfo.avatar + '?' + this.avatar.set
         },
         ...mapState({
-            avatar: s => s.user.avatar,
-            userInfo: s => s.user.info
-        })
+            avatar: s => s.user.avatar
+        }),
+        ...mapGetters([
+            'userInfo'
+        ])
     },
 
     components: { Card }
