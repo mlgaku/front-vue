@@ -2,7 +2,7 @@
 import Card from './Card'
 
 import { Beat } from '@/utils'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { MSG, USER_AVATAR, USER_SET_AVATAR, USER_EDIT_PROFILE } from '@/store/types'
 
 export default {
@@ -13,6 +13,13 @@ export default {
     }),
 
     watch: {
+        // 编辑资料
+        editStatus (val) {
+            if (Beat(val)) {
+                this.$store.dispatch(MSG, '成功保存资料')
+            }
+        },
+
         // 得到token后上传文件
         'avatar.token' (val) {
             if (val === '') {
@@ -88,12 +95,16 @@ export default {
 
     computed: {
         avatarURL () {
-            return this.userInfo.avatar + '?' + this.avatar.set
+            return this.userAvatar + '?' + this.avatar.set
         },
         ...mapState({
             avatar: s => s.user.avatar,
-            userInfo: s => s.user.info
-        })
+            userInfo: s => s.user.info,
+            editStatus: s => s.user.edit
+        }),
+        ...mapGetters([
+            'userAvatar'
+        ])
     },
 
     components: { Card }
