@@ -21,7 +21,8 @@ export default {
     },
 
     computed: mapGetters([
-        'replyList'
+        'replyList',
+        'avatarURL'
     ]),
 
     components: { Marked }
@@ -33,7 +34,7 @@ export default {
     <md-list class="custom-list md-triple-line">
         <md-list-item v-for="x in replyList" :key="x.id">
             <md-avatar>
-                <img :src="x.user.avatar">
+                <img :src="avatarURL(x.user)">
             </md-avatar>
 
             <div class="md-list-text-container">

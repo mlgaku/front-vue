@@ -3,7 +3,8 @@ import { Beat, Draw } from '@/utils'
 import {
     USER_REG, USER_LOGIN, USER_INFO,
     USER_CHECK, USER_CHECK_EMAIL,
-    USER_AVATAR, USER_SET_AVATAR, USER_REMOVE_AVATAR
+    USER_AVATAR, USER_SET_AVATAR, USER_REMOVE_AVATAR,
+    USER_EDIT_PROFILE
 } from '../types'
 
 const state = {
@@ -11,6 +12,8 @@ const state = {
     reg: 0,
     // 登录成功
     login: 0,
+    // 编辑成功
+    edit: 0,
     // 用户信息
     info: {},
 
@@ -34,10 +37,8 @@ const state = {
 }
 
 const getters = {
-    userInfo: (state, getters) => ({
-        ...state.info,
-        ...{ avatar: state.info.avatar ? getters.avatarURL(state.info.name) : Draw(state.info.name) }
-    })
+    userAvatar: (state, getters) =>
+        state.info.avatar ? getters.avatarURL(state.info) : Draw(state.info.name)
 }
 
 const actions = {
@@ -66,6 +67,10 @@ const actions = {
     },
     [USER_REMOVE_AVATAR] ({ commit }) {
         commit(USER_REMOVE_AVATAR, {})
+    },
+
+    [USER_EDIT_PROFILE] ({ commit }, info) {
+        commit(USER_EDIT_PROFILE, info)
     }
 }
 
@@ -111,6 +116,12 @@ const mutations = {
     [USER_REMOVE_AVATAR] (state, body) {
         if (body.status === true) {
             state.avatar.remove = Beat(true)
+        }
+    },
+
+    [USER_EDIT_PROFILE] (state, body) {
+        if (body.status === true) {
+            state.edit = Beat(true)
         }
     }
 }

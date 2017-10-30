@@ -2,8 +2,8 @@
 import Card from './Card'
 
 import { Beat } from '@/utils'
-import { mapState, mapGetters } from 'vuex'
-import { MSG, USER_AVATAR, USER_SET_AVATAR } from '@/store/types'
+import { mapState } from 'vuex'
+import { MSG, USER_AVATAR, USER_SET_AVATAR, USER_EDIT_PROFILE } from '@/store/types'
 
 export default {
     data: () => ({
@@ -61,8 +61,8 @@ export default {
 
     methods: {
         // 提交信息
-        submit () {
-
+        edit () {
+            this.$store.dispatch(USER_EDIT_PROFILE, this.userInfo)
         },
 
         // 上传头像
@@ -91,11 +91,9 @@ export default {
             return this.userInfo.avatar + '?' + this.avatar.set
         },
         ...mapState({
-            avatar: s => s.user.avatar
-        }),
-        ...mapGetters([
-            'userInfo'
-        ])
+            avatar: s => s.user.avatar,
+            userInfo: s => s.user.info
+        })
     },
 
     components: { Card }
@@ -105,8 +103,8 @@ export default {
 <template>
 <div class="root">
 
-    <Card title="个人信息">
-        <form novalidate @submit.stop.prevent="submit">
+    <Card title="编辑资料">
+        <form novalidate @submit.stop.prevent="edit">
             <md-input-container>
                 <label>用户名</label>
                 <md-input v-model="userInfo.name" readonly/>

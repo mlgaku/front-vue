@@ -1,3 +1,4 @@
+import { Draw } from '@/utils'
 import { SITE_STATE } from '../types'
 
 const state = {
@@ -9,9 +10,8 @@ const state = {
 }
 
 const getters = {
-    avatarURL: state => name => {
-        return state.state.avatar_url.replace('{name}', name)
-    }
+    avatarURL: state => user =>
+        user.avatar ? state.state.avatar_url.replace('{name}', user.name) : Draw(user.name)
 }
 
 const actions = {
