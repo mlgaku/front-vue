@@ -75,7 +75,7 @@ export default {
     methods: {
         // 提交信息
         edit () {
-            this.$store.dispatch(USER_EDIT_PROFILE, this.userInfo)
+            this.validate('edit', () => this.$store.dispatch(USER_EDIT_PROFILE, this.userInfo))
         },
 
         // 上传头像
@@ -95,7 +95,12 @@ export default {
 
         // 更改密码
         change () {
-            this.$store.dispatch(USER_CHANGE_PASSWORD, this.passwd)
+            this.validate('change', () => this.$store.dispatch(USER_CHANGE_PASSWORD, this.passwd))
+        },
+
+        // 表单验证
+        validate (s, fn) {
+            this.$validator.validateAll(s).then(res => res && fn())
         }
     },
 
@@ -122,7 +127,7 @@ export default {
 <div class="root">
 
     <Card title="编辑资料">
-        <form novalidate @submit.stop.prevent="edit">
+        <form novalidate @submit.stop.prevent="edit" data-vv-scope="edit">
             <md-input-container>
                 <label>用户名</label>
                 <md-input v-model="userInfo.name" readonly/>
@@ -131,17 +136,29 @@ export default {
                 <label>电子邮箱</label>
                 <md-input v-model="userInfo.email" readonly/>
             </md-input-container>
-            <md-input-container>
+            <md-input-container :class="{'md-input-invalid': errors.has('edit.tagline')}">
                 <label>签名</label>
-                <md-input v-model="userInfo.tagline"/>
+                <md-input
+                    name="tagline"
+                    v-model="userInfo.tagline"
+                    v-validate="'min:3|max:30'"/>
+                <span class="md-error" v-show="errors.has('edit.tagline')">{{ errors.first('edit.tagline') }}</span>
             </md-input-container>
-            <md-input-container>
+            <md-input-container :class="{'md-input-invalid': errors.has('edit.website')}">
                 <label>个人网站</label>
-                <md-input v-model="userInfo.website"/>
+                <md-input
+                    name="website"
+                    v-model="userInfo.website"
+                    v-validate="'min:3|max:30|url'"/>
+                <span class="md-error" v-show="errors.has('edit.website')">{{ errors.first('edit.website') }}</span>
             </md-input-container>
-            <md-input-container>
+            <md-input-container :class="{'md-input-invalid': errors.has('edit.intro')}">
                 <label>个人简介</label>
-                <md-textarea v-model="userInfo.intro"></md-textarea>
+                <md-textarea
+                    name="intro"
+                    v-model="userInfo.intro"
+                    v-validate="'min:5|max:100'"/>
+                <span class="md-error" v-show="errors.has('edit.intro')">{{ errors.first('edit.intro') }}</span>
             </md-input-container>
             <md-button type="submit" class="md-raised md-primary">保存修改</md-button>
         </form>
@@ -155,7 +172,7 @@ export default {
         <div v-else>
             当前还没有上传头像
         </div>
-        <form ref="avatar" novalidate @submit.stop.prevent="upload">
+        <form ref="avatar" novalidate @submit.stop.prevent="upload" data-vv-scope="none">
             <md-input-container>
                 <label>选择图片</label>
                 <md-file required name="file" accept="image/*"/>
@@ -168,14 +185,26 @@ export default {
     </Card>
 
     <Card title="更改密码">
-        <form novalidate @submit.stop.prevent="change">
-            <md-input-container>
+        <form novalidate @submit.stop.prevent="change" data-vv-scope="change">
+            <md-input-container :class="{'md-input-invalid': errors.has('change.password')}">
                 <label>当前密码</label>
-                <md-input type="password" v-model="passwd.password"/>
+                <md-input
+                    required
+                    type="password"
+                    name="password"
+                    v-model="passwd.password"
+                    v-validate="'required|min:8|max:20|alpha_num'"/>
+                <span class="md-error" v-show="errors.has('change.password')">{{ errors.first('change.password') }}</span>
             </md-input-container>
-            <md-input-container md-has-password>
+            <md-input-container :class="{'md-input-invalid': errors.has('change.new_password')}" md-has-password>
                 <label>新密码</label>
-                <md-input type="password" v-model="passwd.new_password"/>
+                <md-input
+                    required
+                    type="password"
+                    name="new_password"
+                    v-model="passwd.new_password"
+                    v-validate="'required|min:8|max:20|alpha_num'"/>
+                <span class="md-error" v-show="errors.has('change.new_password')">{{ errors.first('change.new_password') }}</span>
             </md-input-container>
             <md-button type="submit" class="md-raised md-primary">保存修改</md-button>
         </form>
