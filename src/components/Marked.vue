@@ -1,6 +1,6 @@
 <script>
 import Marked from 'marked'
-import Prism from '@/utils/Prism'
+import { Prism } from '@/utils'
 import 'github-markdown-css'
 
 export default {
