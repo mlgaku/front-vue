@@ -78,6 +78,6 @@ export default {
 }
 .md-list-text-container > a,
 .md-list-text-container > a:hover {
-    color: rgba(0, 0, 0, .87);
+    color: rgba(0, 0, 0, .87) !important;
 }
 </style>

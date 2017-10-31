@@ -50,15 +50,14 @@ export default {
     justify-content: flex-start;
 }
 .list a {
-    color: black;
     font-size: 12px;
     padding: 3px 10px;
     margin: 2px 5px;
     border-radius: 20px;
+    color: black !important;
     border: 1px solid #e0e0e0;
 }
 .list a:hover {
-    color: black;
     background: #e0e0e0;
     text-decoration: none;
 }

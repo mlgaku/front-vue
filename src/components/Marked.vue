@@ -70,7 +70,7 @@ at:hover {
     background: white;
 }
 .markdown-body code[class*="language-"] {
-    color: inherit;
-    background-color: transparent;
+    color: inherit !important;
+    background-color: transparent !important;
 }
 </style>
