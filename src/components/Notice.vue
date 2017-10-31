@@ -48,6 +48,15 @@ export default {
             <div class="text" v-if="x.type == 2">
                 {{ x.user }} 在主题 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }}</router-link> 中 At 了你
             </div>
+            <div class="text" v-if="x.type == 3">
+                {{ x.user }} 修改了你的主题 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }}</router-link>
+            </div>
+            <div class="text" v-if="x.type == 4">
+                {{ x.user }} 移动了你的主题 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }}</router-link>
+            </div>
+            <div class="text" v-if="x.type == 5">
+                {{ x.user }} 修改并移动了你的主题 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }}</router-link>
+            </div>
             <md-button class="md-icon-button" @click="remove(x.id)">
                 <md-icon>delete</md-icon>
             </md-button>
