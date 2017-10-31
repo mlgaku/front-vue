@@ -1,5 +1,5 @@
 import { MSG } from '@/store/types'
-import { Socket, Convert, Protocol } from '@/utils'
+import { Socket, Convert, Constant, Protocol } from '@/utils'
 
 const channel = function (socket) {
     // 待发消息队列
@@ -51,4 +51,4 @@ const channel = function (socket) {
     }
 }
 
-export default channel(Socket('ws://127.0.0.1:8080'))
+export default channel(Socket(Constant.DEVMOD ? 'ws://127.0.0.1:8080' : 'wss://api.maile.co/stream'))

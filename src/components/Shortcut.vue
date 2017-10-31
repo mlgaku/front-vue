@@ -20,9 +20,8 @@ export default {}
 </template>
 
 <style scoped>
-.md-fab a,
-.md-fab a:hover {
-    color: rgba(255, 255, 255, .87);
+.md-fab a {
+    color: rgba(255, 255, 255, .87) !important;
 }
 .md-speed-dial {
     right: 70px;

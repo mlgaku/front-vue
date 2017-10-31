@@ -3,6 +3,7 @@ import Draw from './draw'
 import Prism from './prism'
 import Socket from './socket'
 import Convert from './convert'
+import Constant from './constant'
 import Protocol from './protocol'
 import Validator from './validator'
 
@@ -12,6 +13,7 @@ export {
     Prism,
     Socket,
     Convert,
+    Constant,
     Protocol,
     Validator
 }

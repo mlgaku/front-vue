@@ -9,8 +9,10 @@
     <!-- built files will be auto injected -->
 </body>
 <script>
-window.onbeforeunload = function () {
-    return '关闭页面后你将被设置为离线状态，确定要关闭么？'
+if (document.domain === 'maile.co') {
+    window.onbeforeunload = function () {
+        return '关闭页面后你将被设置为离线状态，确定要关闭么？'
+    }
 }
 </script>
 </html>

@@ -76,8 +76,7 @@ export default {
 .md-list-text-container p {
     margin-top: 10px;
 }
-.md-list-text-container > a,
-.md-list-text-container > a:hover {
+.md-list-text-container > a {
     color: rgba(0, 0, 0, .87) !important;
 }
 </style>
