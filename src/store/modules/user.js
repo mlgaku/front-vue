@@ -4,7 +4,7 @@ import {
     USER_REG, USER_LOGIN, USER_INFO,
     USER_CHECK, USER_CHECK_EMAIL,
     USER_AVATAR, USER_SET_AVATAR, USER_REMOVE_AVATAR,
-    USER_EDIT_PROFILE
+    USER_EDIT_PROFILE, USER_CHANGE_PASSWORD
 } from '../types'
 
 const state = {
@@ -14,6 +14,8 @@ const state = {
     login: 0,
     // 编辑成功
     edit: 0,
+    // 更改密码成功
+    change: 0,
     // 用户信息
     info: {},
 
@@ -71,6 +73,9 @@ const actions = {
 
     [USER_EDIT_PROFILE] ({ commit }, info) {
         commit(USER_EDIT_PROFILE, info)
+    },
+    [USER_CHANGE_PASSWORD] ({ commit }, info) {
+        commit(USER_CHANGE_PASSWORD, info)
     }
 }
 
@@ -122,6 +127,11 @@ const mutations = {
     [USER_EDIT_PROFILE] (state, body) {
         if (body.status === true) {
             state.edit = Beat(true)
+        }
+    },
+    [USER_CHANGE_PASSWORD] (state, body) {
+        if (body.status === true) {
+            state.change = Beat(true)
         }
     }
 }

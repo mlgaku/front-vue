@@ -3,13 +3,12 @@ import Card from './Card'
 
 import { Beat } from '@/utils'
 import { mapState, mapGetters } from 'vuex'
-import { MSG, USER_AVATAR, USER_SET_AVATAR, USER_EDIT_PROFILE } from '@/store/types'
+import { MSG, USER_AVATAR, USER_SET_AVATAR, USER_EDIT_PROFILE, USER_CHANGE_PASSWORD } from '@/store/types'
 
 export default {
     data: () => ({
         // 更改密码
-        passwd: {
-        }
+        passwd: {}
     }),
 
     watch: {
@@ -17,6 +16,13 @@ export default {
         editStatus (val) {
             if (Beat(val)) {
                 this.$store.dispatch(MSG, '成功保存资料')
+            }
+        },
+
+        // 更改密码
+        changeStatus (val) {
+            if (Beat(val)) {
+                this.$store.dispatch(MSG, '更改密码成功')
             }
         },
 
@@ -89,7 +95,7 @@ export default {
 
         // 更改密码
         change () {
-
+            this.$store.dispatch(USER_CHANGE_PASSWORD, this.passwd)
         }
     },
 
@@ -100,7 +106,8 @@ export default {
         ...mapState({
             avatar: s => s.user.avatar,
             userInfo: s => s.user.info,
-            editStatus: s => s.user.edit
+            editStatus: s => s.user.edit,
+            changeStatus: s => s.user.change
         }),
         ...mapGetters([
             'userAvatar'
@@ -164,11 +171,11 @@ export default {
         <form novalidate @submit.stop.prevent="change">
             <md-input-container>
                 <label>当前密码</label>
-                <md-input type="password"/>
+                <md-input type="password" v-model="passwd.password"/>
             </md-input-container>
             <md-input-container md-has-password>
                 <label>新密码</label>
-                <md-input type="password"/>
+                <md-input type="password" v-model="passwd.new_password"/>
             </md-input-container>
             <md-button type="submit" class="md-raised md-primary">保存修改</md-button>
         </form>
