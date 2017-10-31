@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import New from '@/views/New'
+import Edit from '@/views/Edit'
 import Home from '@/views/Home'
 import Node from '@/views/Node'
 import Rank from '@/views/Rank'
@@ -37,6 +38,10 @@ export default new Router({
         {
             path: '/node/:name',
             component: List
+        },
+        {
+            path: '/edit/:id',
+            component: Edit
         },
         {
             path: '/topic/:id',

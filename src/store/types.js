@@ -37,6 +37,7 @@ export const USER_CHANGE_PASSWORD = 'USER_CHANGE_PASSWORD'
 
 // 主题
 export const TOPIC_NEW = 'TOPIC_NEW'
+export const TOPIC_EDIT = 'TOPIC_EDIT'
 export const TOPIC_LIST = 'TOPIC_LIST'
 export const TOPIC_INFO = 'TOPIC_INFO'
 

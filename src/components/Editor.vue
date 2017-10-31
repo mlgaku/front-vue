@@ -68,7 +68,7 @@ export default {
 <template>
 <md-layout>
     <md-layout>
-        <textarea ref="editor"></textarea>
+        <textarea ref="editor" v-model="value"></textarea>
     </md-layout>
     <md-layout :style="{'max-height': maxHeight}">
         <Marked padding="5px" :content="content"/>

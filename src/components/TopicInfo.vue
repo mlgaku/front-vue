@@ -17,40 +17,55 @@ export default {
 </script>
 
 <template>
-<md-whiteframe md-elevation="2">
-    <div v-if="info.id === undefined">
-        加载中...
-    </div>
-    <div v-else>
-        <div class="meta">
-            <h1>{{ info.title }}</h1>
-            <span>{{ info.user.name }} • {{ nodeTitle(info.node) }} • {{ info.date }} • {{ info.views }} 次查看 • {{ info.replies }} 条回复</span>
-        </div>
-        <div class="body" v-if="info.content">
-            <Marked :content="info.content"/>
-        </div>
-    </div>
-</md-whiteframe>
+<div v-if="info.id === undefined">
+    加载中...
+</div>
+
+<md-card v-else>
+    <md-card-header :style="{background: info.content ? '#fafafa' : ''}">
+        <md-card-header-text>
+            <div class="md-title">{{ info.title }}</div>
+            <div class="md-subhead">
+                {{ info.user.name }} • {{ nodeTitle(info.node) }} • {{ info.date }} • {{ info.views }} 次查看 • {{ info.replies }} 条回复
+            </div>
+        </md-card-header-text>
+
+        <md-menu md-size="4" md-direction="bottom left">
+            <md-button class="md-icon-button" md-menu-trigger>
+                <md-icon>more_vert</md-icon>
+            </md-button>
+
+            <md-menu-content>
+                <router-link :to="`/edit/${info.id}`">
+                    <md-menu-item>
+                        <span>编辑</span>
+                        <md-icon>edit</md-icon>
+                    </md-menu-item>
+                </router-link>
+
+                <md-menu-item>
+                    <span>删除主题</span>
+                    <md-icon>delete</md-icon>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-card-header>
+
+    <md-card-content v-if="info.content">
+        <Marked :content="info.content"/>
+    </md-card-content>
+</md-card>
 </template>
 
 <style scoped>
-.meta {
-    padding: 15px;
-    background: #fafafa;
-}
-.meta h1 {
-    font-size: 26px;
-}
-.meta span {
-    color: gray;
-    font-size: 13px;
-}
-.body {
-    margin: 5px 0;
-    padding: 15px;
-}
-.md-whiteframe {
+.md-card {
     width: 100%;
-    background: white;
+}
+.md-card-content {
+    margin-top: 16px;
+}
+.md-menu-content a {
+    color: inherit !important;
+    text-decoration: none !important;
 }
 </style>
