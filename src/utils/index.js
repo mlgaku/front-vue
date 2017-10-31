@@ -3,7 +3,7 @@ import Draw from './draw'
 import Socket from './socket'
 import Convert from './convert'
 import Protocol from './protocol'
-import Validator from './Validator'
+import Validator from './validator'
 
 export {
     Beat,
