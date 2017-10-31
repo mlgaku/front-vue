@@ -87,7 +87,8 @@ export default {
     font-size: 13px;
     color: rgba(0, 0, 0, 0.87);
 }
-.md-menu-content a {
+.md-menu-content a,
+.md-menu-content a:hover {
     text-decoration: none;
     color: inherit !important;
 }
