@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>maile-front</title>
-  </head>
-  <body>
+</head>
+<body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-  </body>
+</body>
+<script>
+window.onbeforeunload = function () {
+    return '关闭页面后你将被设置为离线状态，确定要关闭么？'
+}
+</script>
 </html>
