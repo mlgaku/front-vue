@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { Beat } from '@/utils'
+import { Beat, Sort } from '@/utils'
 import { NODE_ADD, NODE_EDIT, NODE_LIST, NODE_CHECK, NODE_REMOVE } from '../types'
 
 const state = {
@@ -32,7 +32,7 @@ const getters = {
             tmp[x.parent].child.push(x)
         }
 
-        return Object.values(tmp)
+        return Sort(Object.values(tmp), 'sort')
     },
 
     nodeInfo: state => arr => {

@@ -1,5 +1,6 @@
 import Beat from './beat'
 import Draw from './draw'
+import Sort from './sort'
 import Prism from './prism'
 import Socket from './socket'
 import Convert from './convert'
@@ -10,6 +11,7 @@ import Validator from './validator'
 export {
     Beat,
     Draw,
+    Sort,
     Prism,
     Socket,
     Convert,

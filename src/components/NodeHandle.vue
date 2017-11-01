@@ -151,13 +151,13 @@ export default {
                 <md-input
                     name="sort"
                     type="number"
-                    v-model="nodeModel.sort"
+                    v-model.number="nodeModel.sort"
                     v-validate="'numeric'"/>
                 <span class="md-error" v-show="errors.has('sort')">{{ errors.first('sort') }}</span>
             </md-input-container>
 
             <md-input-container :class="{'md-input-invalid': errors.has('desc')}">
-                <label>节点描述</label>
+                <label>描述信息</label>
                 <md-textarea
                     name="desc"
                     v-model="nodeModel.desc"
