@@ -1,26 +1,45 @@
 <script>
-import Card from './Card'
 import { mapGetters } from 'vuex'
 
+import Card from './Card'
+import NodeHandle from './NodeHandle'
+
 export default {
+    data: () => ({
+        // 添加节点
+        addNode: {},
+        // 移除节点 ID
+        removeId: ''
+    }),
+
     computed: {
         ...mapGetters([
             'nodeList'
         ])
     },
 
-    components: { Card }
+    components: { Card, NodeHandle }
 }
 </script>
 
 <template>
 <div class="root">
+    <!-- 统计信息 -->
+    <Card title="全部节点">
+        共有 3 个父节点, 22 个子节点
+        <div slot="oper">
+            <md-button class="md-icon-button" @click="addNode = { show: true }">
+                <md-icon>add</md-icon>
+            </md-button>
+        </div>
+    </Card>
+    <!-- 节点列表 -->
     <Card v-for="x in nodeList" :key="x.id" :title="x.title">
         <div slot="oper">
-            <md-button class="md-icon-button" @click="$emit('remove', x.id)">
+            <md-button class="md-icon-button" @click="removeId = x.id">
                 <md-icon>remove</md-icon>
             </md-button>
-            <md-button class="md-icon-button" @click="$emit('add', x.id)">
+            <md-button class="md-icon-button" @click="addNode = { show: true, parent: x.id }">
                 <md-icon>add</md-icon>
             </md-button>
         </div>
@@ -32,6 +51,11 @@ export default {
             >{{ c.title }}</router-link>
         </div>
     </Card>
+    <!-- 节点操作处理 -->
+    <NodeHandle
+        :addNode="addNode"
+        :removeId="removeId"
+        @close="t => t === 1 ? addNode = {} : removeId = ''"/>
 </div>
 </template>
 
@@ -39,7 +63,7 @@ export default {
 .root {
     width: 100%;
 }
-.root > * {
+.root > * + * {
     margin-top: 20px;
 }
 .list {

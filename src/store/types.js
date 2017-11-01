@@ -18,6 +18,7 @@ export const SITE_STATE = 'SITE_STATE'
 
 // 节点
 export const NODE_ADD = 'NODE_ADD'
+export const NODE_EDIT = 'NODE_EDIT'
 export const NODE_LIST = 'NODE_LIST'
 export const NODE_INFO = 'NODE_INFO'
 export const NODE_CHECK = 'NODE_CHECK'

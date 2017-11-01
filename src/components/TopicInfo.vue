@@ -44,8 +44,8 @@ export default {
                 </router-link>
 
                 <md-menu-item>
-                    <span>删除主题</span>
-                    <md-icon>delete</md-icon>
+                    <span>补充内容</span>
+                    <md-icon>playlist_add</md-icon>
                 </md-menu-item>
             </md-menu-content>
         </md-menu>

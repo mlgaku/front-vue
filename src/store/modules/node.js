@@ -1,10 +1,12 @@
 import _ from 'lodash'
 import { Beat } from '@/utils'
-import { NODE_ADD, NODE_LIST, NODE_CHECK, NODE_REMOVE } from '../types'
+import { NODE_ADD, NODE_EDIT, NODE_LIST, NODE_CHECK, NODE_REMOVE } from '../types'
 
 const state = {
     // 添加成功
     add: 0,
+    // 编辑成功
+    edit: 0,
     // 节点列表
     list: [],
     // 检查节点名
@@ -47,6 +49,9 @@ const actions = {
     [NODE_ADD] ({ commit }, info) {
         commit(NODE_ADD, info)
     },
+    [NODE_EDIT] ({ commit }, info) {
+        commit(NODE_EDIT, info)
+    },
     [NODE_CHECK]: _.debounce(({ commit }, name) => {
         commit(NODE_CHECK, { name })
     }, 500),
@@ -59,6 +64,11 @@ const mutations = {
     [NODE_ADD] (state, body) {
         if (body.status === true) {
             state.add = Beat(true)
+        }
+    },
+    [NODE_EDIT] (state, body) {
+        if (body.status === true) {
+            state.edit = Beat(true)
         }
     },
     [NODE_LIST] (state, body) {
