@@ -5,11 +5,19 @@ import TopicInfo from '@/components/TopicInfo'
 import ReplyList from '@/components/ReplyList'
 
 import { mapState } from 'vuex'
-import { TOPIC_INFO } from '@/store/types'
+import { SUB_ADD, SUB_REMOVE, TOPIC_INFO, REPLY_LIST } from '@/store/types'
 
 export default {
     beforeMount () {
         this.$store.dispatch(TOPIC_INFO, this.topicId)
+        this.$store.dispatch(SUB_ADD, {
+            type: REPLY_LIST,
+            body: { topic: this.topicId }
+        })
+    },
+
+    destroyed () {
+        this.$store.dispatch(SUB_REMOVE, REPLY_LIST)
     },
 
     computed: {
@@ -17,7 +25,8 @@ export default {
             return this.$route.params.id
         },
         ...mapState({
-            topicInfo: s => s.topic.info
+            topicInfo: s => s.topic.info,
+            replyList: s => s.reply.list
         })
     },
 
@@ -33,7 +42,7 @@ export default {
                 <!-- 主题信息 -->
                 <TopicInfo :info="topicInfo"/>
                 <!-- 回复列表 -->
-                <ReplyList :tid="topicId"/>
+                <ReplyList :list="replyList"/>
                 <!-- 回复主题 -->
                 <Reply :tid="topicId"/>
             </md-layout>
