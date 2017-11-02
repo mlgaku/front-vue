@@ -20,8 +20,8 @@ export default {
 
     created () {
         const renderer = new Marked.Renderer()
-        renderer.html = html => {
-            console.log(html)
+        renderer.link = (href, title, text) => {
+            return `<a rel="nofollow" href="${href}" title="${title || ''}" target="_blank">${text}</a>`
         }
 
         Marked.setOptions({
