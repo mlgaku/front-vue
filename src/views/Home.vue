@@ -3,7 +3,22 @@ import Card from '@/components/Card'
 import Shortcut from '@/components/Shortcut'
 import TopicList from '@/components/TopicList'
 
+import { mapGetters } from 'vuex'
+import { SUB_ADD, SUB_REMOVE, TOPIC_LIST } from '@/store/types'
+
 export default {
+    beforeMount () {
+        this.$store.dispatch(SUB_ADD, TOPIC_LIST)
+    },
+
+    destroyed () {
+        this.$store.dispatch(SUB_REMOVE, TOPIC_LIST)
+    },
+
+    computed: mapGetters([
+        'topicList'
+    ]),
+
     components: { Card, Shortcut, TopicList }
 }
 </script>
@@ -15,7 +30,7 @@ export default {
             <md-layout class="main" md-gutter="16">
                 <md-layout md-flex="75">
                     <!-- 列表 -->
-                    <TopicList/>
+                    <TopicList :list="topicList"/>
                 </md-layout>
                 <md-layout md-flex="25">
                     <!-- 卡片 -->

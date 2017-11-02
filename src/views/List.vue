@@ -5,8 +5,23 @@ import NodeInfo from '@/components/NodeInfo'
 import TopicList from '@/components/TopicList'
 
 import { mapGetters } from 'vuex'
+import { SUB_ADD, SUB_REMOVE, TOPIC_LIST } from '@/store/types'
 
 export default {
+    watch: {
+        'info.id': {
+            handler (val) {
+                if (val) {
+                    this.$store.dispatch(SUB_ADD, {
+                        type: TOPIC_LIST,
+                        body: { node: val }
+                    })
+                }
+            },
+            immediate: true
+        }
+    },
+
     computed: {
         // 节点信息
         info () {
@@ -14,8 +29,13 @@ export default {
         },
 
         ...mapGetters([
-            'nodeInfo'
+            'nodeInfo',
+            'topicList'
         ])
+    },
+
+    destroyed () {
+        this.$store.dispatch(SUB_REMOVE, TOPIC_LIST)
     },
 
     components: { Card, Shortcut, NodeInfo, TopicList }
@@ -31,7 +51,7 @@ export default {
                     <!-- 节点信息 -->
                     <NodeInfo :info="info"/>
                     <!-- 主题列表 -->
-                    <TopicList :node="info.id"/>
+                    <TopicList :list="topicList"/>
                 </md-layout>
                 <md-layout md-flex="25">
                     <!-- 卡片 -->

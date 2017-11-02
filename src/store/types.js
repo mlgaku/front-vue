@@ -27,6 +27,7 @@ export const NODE_REMOVE = 'NODE_REMOVE'
 // 用户
 export const USER_REG = 'USER_REG'
 export const USER_LOGIN = 'USER_LOGIN'
+export const USER_HOME = 'USER_HOME'
 export const USER_INFO = 'USER_INFO'
 export const USER_CHECK = 'USER_CHECK'
 export const USER_CHECK_EMAIL = 'USER_CHECK_EMAIL'

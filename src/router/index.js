@@ -7,6 +7,7 @@ import Home from '@/views/Home'
 import Node from '@/views/Node'
 import Rank from '@/views/Rank'
 import List from '@/views/List'
+import User from '@/views/User'
 import Topic from '@/views/Topic'
 import Setting from '@/views/Setting'
 
@@ -38,6 +39,10 @@ export default new Router({
         {
             path: '/node/:name',
             component: List
+        },
+        {
+            path: '/user/:name',
+            component: User
         },
         {
             path: '/edit/:id',

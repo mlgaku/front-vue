@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { Beat, Draw } from '@/utils'
 import {
-    USER_REG, USER_LOGIN, USER_INFO,
+    USER_REG, USER_LOGIN, USER_HOME, USER_INFO,
     USER_CHECK, USER_CHECK_EMAIL,
     USER_AVATAR, USER_SET_AVATAR, USER_REMOVE_AVATAR,
     USER_EDIT_PROFILE, USER_CHANGE_PASSWORD
@@ -12,6 +12,8 @@ const state = {
     reg: 0,
     // 登录成功
     login: 0,
+    // 用户主页
+    home: {},
     // 编辑成功
     edit: 0,
     // 更改密码成功
@@ -49,6 +51,9 @@ const actions = {
     },
     [USER_LOGIN] ({ commit }, info) {
         commit(USER_LOGIN, info)
+    },
+    [USER_HOME]  ({ commit }, name) {
+        commit(USER_HOME, { name })
     },
     [USER_INFO] ({ commit }) {
         commit(USER_INFO, {})
@@ -88,6 +93,11 @@ const mutations = {
     [USER_LOGIN] (state, body) {
         if (body.status === true) {
             state.login = Beat(true)
+        }
+    },
+    [USER_HOME] (state, body) {
+        if (body.status === true) {
+            state.home = body.data
         }
     },
     [USER_INFO] (state, body) {
