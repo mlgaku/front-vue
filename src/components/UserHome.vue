@@ -31,7 +31,7 @@ export default {
             </md-card-media>
 
             <md-card-header-text>
-                <div class="md-title">dven</div>
+                <div class="md-title">{{ info.user.name }}</div>
                 <div class="md-subhead">
                     <p>{{ info.user.intro }}</p>
                     <p>加入于 {{ info.user.reg_date }}</p>
