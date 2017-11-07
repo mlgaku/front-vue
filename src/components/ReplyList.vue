@@ -44,12 +44,11 @@ export default {
     margin-left: 0;
 }
 .content {
-    margin-top: 3px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    white-space: normal;
 }
 .md-whiteframe {
     width: 100%;
-}
-.md-list-text-container {
-    align-items: flex-start;
 }
 </style>
