@@ -21,7 +21,7 @@ export default {
 <template>
 <md-whiteframe md-elevation="2">
     <md-list class="custom-list md-triple-line">
-        <md-list-item v-for="x in list" :key="x.id">
+        <md-list-item v-for="x in list" :key="x.id" class="reply-list">
             <md-avatar v-if="!noavt">
                 <img :src="avatarURL(x.user)">
             </md-avatar>
@@ -44,11 +44,17 @@ export default {
     margin-left: 0;
 }
 .content {
-    padding-top: 10px;
-    padding-bottom: 10px;
     white-space: normal;
 }
 .md-whiteframe {
     width: 100%;
+}
+</style>
+
+<style>
+.reply-list.md-list-item > div.md-list-item-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: auto !important;
 }
 </style>
