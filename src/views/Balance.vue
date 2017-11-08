@@ -1,9 +1,9 @@
 <script>
 import Card from '@/components/Card'
-import UserInfo from '@/components/UserInfo'
+import BillList from '@/components/BillList'
 
 export default {
-    components: { Card, UserInfo }
+    components: { Card, BillList }
 }
 </script>
 
@@ -12,7 +12,14 @@ export default {
     <md-layout md-flex="65">
         <md-layout class="main" md-gutter="16">
             <md-layout md-flex="75">
-                <UserInfo/>
+                    <Card title="账户余额" nopad>
+                        <!-- 余额 -->
+                        <div class="balance">
+                            <md-chip>当前余额：553 点</md-chip>
+                        </div>
+                        <!-- 账单列表 -->
+                        <BillList/>
+                    </Card>
             </md-layout>
             <md-layout md-flex="25">
                 <!-- 卡片 -->
@@ -26,6 +33,13 @@ export default {
 </template>
 
 <style scoped>
+.balance {
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+.balance > * {
+    margin-left: 16px;
+}
 .main {
     align-items: flex-start;
 }
