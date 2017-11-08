@@ -11,6 +11,7 @@ export default {
     },
 
     computed: mapGetters([
+        'date',
         'avatarURL'
     ]),
 
@@ -27,7 +28,10 @@ export default {
             </md-avatar>
 
             <div class="md-list-text-container">
-                <router-link v-if="x.user.name" :to="`/user/${x.user.name}`">{{ x.user.name }}</router-link>
+                <div class="author">
+                    <router-link v-if="x.user.name" :to="`/user/${x.user.name}`">{{ x.user.name }}</router-link>
+                    <span>{{ date(x.date) }}</span>
+                </div>
                 <div class="content">
                     <Marked :content="x.content"/>
                 </div>
@@ -43,7 +47,15 @@ export default {
 .noavt {
     margin-left: 0;
 }
+.author > a {
+    margin-right: 10px;
+}
+.author > span {
+    color: gray;
+    font-size: 13px;
+}
 .content {
+    margin-top: 3px;
     white-space: normal;
 }
 .md-whiteframe {

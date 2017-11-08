@@ -9,6 +9,7 @@ export default {
     },
 
     computed: mapGetters([
+        'date',
         'nodeTitle'
     ]),
 
@@ -22,11 +23,11 @@ export default {
 </div>
 
 <md-card v-else>
-    <md-card-header :style="{background: info.content ? '#fafafa' : ''}">
+    <md-card-header :style="{borderBottom: info.content ? '1px solid rgba(0, 0, 0, 0.12)' : ''}">
         <md-card-header-text>
             <div class="md-title">{{ info.title }}</div>
             <div class="md-subhead">
-                {{ info.user.name }} • {{ nodeTitle(info.node) }} • {{ info.date }} • {{ info.views }} 次查看 • {{ info.replies }} 条回复
+                {{ info.user.name }} • {{ nodeTitle(info.node) }} • {{ date(info.date) }} • {{ info.views }} 次查看 • {{ info.replies }} 条回复
             </div>
         </md-card-header-text>
 

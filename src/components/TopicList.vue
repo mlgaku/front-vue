@@ -11,6 +11,7 @@ export default {
 
     computed: {
         ...mapGetters([
+            'date',
             'nodeTitle',
             'avatarURL'
         ])
@@ -28,7 +29,7 @@ export default {
 
             <div class="md-list-text-container">
                 <router-link :to="`/topic/${x.id}`">{{ x.title }}</router-link>
-                <p>{{ x.user.name ? `${x.user.name} •` : '' }} {{ nodeTitle(x.node) }} • {{ x.date }} {{ x.last_reply ? `• 最后回复来自 ${x.last_reply}` : '' }}</p>
+                <p>{{ x.user.name ? `${x.user.name} •` : '' }} {{ nodeTitle(x.node) }} • {{ date(x.date) }} {{ x.last_reply ? `• 最后回复来自 ${x.last_reply}` : '' }}</p>
             </div>
 
             <md-button class="md-icon-button">{{ x.replies }}</md-button>
