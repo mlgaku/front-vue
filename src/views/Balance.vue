@@ -1,8 +1,14 @@
 <script>
+import { mapState } from 'vuex'
+
 import Card from '@/components/Card'
 import BillList from '@/components/BillList'
 
 export default {
+    computed: mapState({
+        userInfo: s => s.user.info
+    }),
+
     components: { Card, BillList }
 }
 </script>
@@ -15,7 +21,7 @@ export default {
                     <Card title="账户余额" nopad>
                         <!-- 余额 -->
                         <div class="balance">
-                            <md-chip>当前余额：553 点</md-chip>
+                            <md-chip>当前余额：{{ userInfo.balance }} 点</md-chip>
                         </div>
                         <!-- 账单列表 -->
                         <BillList/>

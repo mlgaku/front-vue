@@ -37,6 +37,9 @@ export const USER_REMOVE_AVATAR = 'USER_REMOVE_AVATAR'
 export const USER_EDIT_PROFILE = 'USER_EDIT_PROFILE'
 export const USER_CHANGE_PASSWORD = 'USER_CHANGE_PASSWORD'
 
+// 账单
+export const BILL_LIST = 'BILL_LIST'
+
 // 主题
 export const TOPIC_NEW = 'TOPIC_NEW'
 export const TOPIC_EDIT = 'TOPIC_EDIT'

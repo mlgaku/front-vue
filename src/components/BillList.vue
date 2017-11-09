@@ -1,5 +1,18 @@
 <script>
-export default {}
+import { mapState } from 'vuex'
+import { BILL_LIST } from '@/store/types'
+
+export default {
+    computed: {
+        ...mapState({
+            billList: s => s.bill.list
+        })
+    },
+
+    beforeMount () {
+        this.$store.dispatch(BILL_LIST)
+    }
+}
 </script>
 
 <template>
@@ -15,12 +28,12 @@ export default {}
     </md-table-header>
 
     <md-table-body>
-        <md-table-row v-for="(row, index) in 5" :key="index">
-            <md-table-cell>{{ index + 1 }}</md-table-cell>
-            <md-table-cell>2017-10-14T19:27:47.735+08:00</md-table-cell>
-            <md-table-cell>每日签到</md-table-cell>
-            <md-table-cell md-numeric>20</md-table-cell>
-            <md-table-cell>20171103 签到获得</md-table-cell>
+        <md-table-row v-for="(x, i) in billList" :key="i">
+            <md-table-cell>{{ i + 1 }}</md-table-cell>
+            <md-table-cell>{{ x.date }}</md-table-cell>
+            <md-table-cell>{{ x.type }}</md-table-cell>
+            <md-table-cell md-numeric>{{ x.number }}</md-table-cell>
+            <md-table-cell>{{ x.msg }}</md-table-cell>
         </md-table-row>
     </md-table-body>
 </md-table>

@@ -38,7 +38,9 @@ export default {
                 <span>{{ userInfo.email }}</span>
             </div>
         </div>
-        <md-menu-item>余额</md-menu-item>
+        <router-link to="/balance">
+            <md-menu-item>余额</md-menu-item>
+        </router-link>
         <router-link to="/setting">
             <md-menu-item>设置</md-menu-item>
         </router-link>
