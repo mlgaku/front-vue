@@ -9,7 +9,7 @@ import Rank from '@/views/Rank'
 import List from '@/views/List'
 import User from '@/views/User'
 import Topic from '@/views/Topic'
-import Balance from '@/views/balance'
+import Balance from '@/views/Balance'
 import Setting from '@/views/Setting'
 
 Vue.use(Router)
