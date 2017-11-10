@@ -1,12 +1,15 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { BILL_LIST } from '@/store/types'
 
 export default {
     computed: {
         ...mapState({
             billList: s => s.bill.list
-        })
+        }),
+        ...mapGetters([
+            'billType'
+        ])
     },
 
     beforeMount () {
@@ -31,7 +34,7 @@ export default {
         <md-table-row v-for="(x, i) in billList" :key="i">
             <md-table-cell>{{ i + 1 }}</md-table-cell>
             <md-table-cell>{{ x.date }}</md-table-cell>
-            <md-table-cell>{{ x.type }}</md-table-cell>
+            <md-table-cell>{{ billType(x.type) }}</md-table-cell>
             <md-table-cell md-numeric>{{ x.number }}</md-table-cell>
             <md-table-cell>{{ x.msg }}</md-table-cell>
         </md-table-row>

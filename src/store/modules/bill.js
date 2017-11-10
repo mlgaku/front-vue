@@ -6,6 +6,9 @@ const state = {
 }
 
 const getters = {
+    billType: () => type => {
+        return ['新主题', '回复主题', '签到'][type - 1]
+    }
 }
 
 const actions = {
