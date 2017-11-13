@@ -3,7 +3,7 @@ import Draw from './draw'
 import Sort from './sort'
 import Prism from './prism'
 import Socket from './socket'
-import Moment from './moment'
+import Timeago from './timeago'
 import Convert from './convert'
 import Constant from './constant'
 import Protocol from './protocol'
@@ -15,7 +15,7 @@ export {
     Sort,
     Prism,
     Socket,
-    Moment,
+    Timeago,
     Convert,
     Constant,
     Protocol,

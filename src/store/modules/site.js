@@ -1,5 +1,5 @@
 import { SITE_STATE } from '../types'
-import { Draw, Moment } from '@/utils'
+import { Draw, Timeago } from '@/utils'
 
 const state = {
     // 站点信息
@@ -10,7 +10,7 @@ const state = {
 }
 
 const getters = {
-    date: state => date => Moment(date).fromNow(),
+    date: state => date => Timeago(date),
 
     avatarURL: state => user =>
         user.avatar ? state.state.avatar_url.replace('{name}', user.name) : Draw(user.name)
