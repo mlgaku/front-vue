@@ -29,7 +29,16 @@ export default {
 
             <div class="md-list-text-container">
                 <router-link :to="`/topic/${x.id}`">{{ x.title }}</router-link>
-                <p>{{ x.user.name ? `${x.user.name} •` : '' }} {{ nodeTitle(x.node) }} • {{ date(x.date) }} {{ x.last_reply ? `• 最后回复来自 ${x.last_reply}` : '' }}</p>
+                <div>
+                    <!-- 用户名 -->
+                    {{ x.user.name ? `${x.user.name} •` : '' }}
+                    <!-- 节点名 -->
+                    {{ nodeTitle(x.node) }} •
+                    <!-- 回复时间 -->
+                    <span :title="x.date">{{ date(x.date) }}</span>
+                    <!-- 最后回复 -->
+                    {{ x.last_reply ? `• 最后回复来自 ${x.last_reply}` : '' }}
+                </div>
             </div>
 
             <md-button class="md-icon-button">{{ x.replies }}</md-button>
@@ -61,7 +70,7 @@ export default {
 .md-icon-button:hover {
     background: #928f8f !important;
 }
-.md-list-text-container p {
+.md-list-text-container div {
     margin-top: 10px;
 }
 .md-list-text-container > a {

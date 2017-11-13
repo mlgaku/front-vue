@@ -30,7 +30,7 @@ export default {
             <div class="md-list-text-container">
                 <div class="author">
                     <router-link v-if="x.user.name" :to="`/user/${x.user.name}`">{{ x.user.name }}</router-link>
-                    <span>{{ date(x.date) }}</span>
+                    <span :title="x.date">{{ date(x.date) }}</span>
                 </div>
                 <div class="content">
                     <Marked :content="x.content"/>
@@ -67,6 +67,10 @@ export default {
 .reply-list.md-list-item > div.md-list-item-container {
     padding-top: 20px;
     padding-bottom: 20px;
+    align-items: flex-start;
     min-height: auto !important;
+}
+.reply-list.md-list-item > div.md-list-item-container > .md-avatar {
+    margin-top: 6px;
 }
 </style>

@@ -27,7 +27,14 @@ export default {
         <md-card-header-text>
             <div class="md-title">{{ info.title }}</div>
             <div class="md-subhead">
-                {{ info.user.name }} • {{ nodeTitle(info.node) }} • {{ date(info.date) }} • {{ info.views }} 次查看 • {{ info.replies }} 条回复
+                <!-- 用户名 -->
+                {{ info.user.name }} •
+                <!-- 节点名 -->
+                {{ nodeTitle(info.node) }} •
+                <!-- 发表日期 -->
+                <span :title="info.date">{{ date(info.date) }}</span> •
+                <!-- 查看&回复次数 -->
+                {{ info.views }} 次查看 • {{ info.replies }} 条回复
             </div>
         </md-card-header-text>
 
