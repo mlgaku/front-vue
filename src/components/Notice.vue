@@ -41,6 +41,9 @@ export default {
 
     <md-menu-content class="notice">
         <div class="card">通知</div>
+        <div class="nomsg" v-if="noticeList.length < 1">
+            当前还没有未读的通知信息
+        </div>
         <md-menu-item v-for="x in noticeList" :key="x.id">
             <div class="text" v-if="x.type == 1">
                 {{ x.user }} 回复了你的主题 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }}</router-link>
@@ -78,6 +81,9 @@ export default {
     background: #f1f1f1;
     margin-top: -8px;
     margin-bottom: 8px;
+}
+.nomsg {
+    padding: 16px;
 }
 .md-menu {
     display: flex;
