@@ -41,8 +41,8 @@ export default {
 
     <md-menu-content class="notice">
         <div class="card">通知</div>
-        <div class="nomsg" v-if="noticeList.length < 1">
-            当前还没有未读的通知信息
+        <div class="nomsg" v-if="!noticeList || noticeList.length < 1">
+            当前还没有未读的通知
         </div>
         <md-menu-item v-for="x in noticeList" :key="x.id">
             <div class="text" v-if="x.type == 1">
