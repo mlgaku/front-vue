@@ -1,8 +1,14 @@
 <script>
+import Pagination from './Pagination'
+
 import { mapGetters } from 'vuex'
 
 export default {
     props: {
+        // 当前页
+        page: Number,
+        // 总页数
+        total: Number,
         // 主题列表
         list: Array,
         // 不显示头像
@@ -15,12 +21,15 @@ export default {
             'nodeTitle',
             'avatarURL'
         ])
-    }
+    },
+
+    components: { Pagination }
 }
 </script>
 
 <template>
 <md-whiteframe md-elevation="2">
+    <!-- 列表 -->
     <md-list class="custom-list md-triple-line">
         <md-list-item v-for="x in list" :key="x.id">
             <md-avatar v-if="!noavt">
@@ -46,6 +55,12 @@ export default {
             <md-divider class="md-inset" :class="{noavt: noavt}"></md-divider>
         </md-list-item>
     </md-list>
+
+    <!-- 分页器 -->
+    <Pagination
+        :page="page"
+        :total="total"
+        @onpage="$emit('onpage', arguments[0])"/>
 </md-whiteframe>
 </template>
 

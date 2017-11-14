@@ -8,11 +8,23 @@ import { SUB_ADD, SUB_REMOVE, TOPIC_LIST } from '@/store/types'
 
 export default {
     beforeMount () {
-        this.$store.dispatch(SUB_ADD, TOPIC_LIST)
+        this.$store.dispatch(SUB_ADD, {
+            type: TOPIC_LIST,
+            body: { page: 1 }
+        })
     },
 
     destroyed () {
         this.$store.dispatch(SUB_REMOVE, TOPIC_LIST)
+    },
+
+    methods: {
+        onpage (p) {
+            this.$store.dispatch(SUB_ADD, {
+                type: TOPIC_LIST,
+                body: { page: p }
+            })
+        }
     },
 
     computed: mapGetters([
@@ -30,7 +42,11 @@ export default {
             <md-layout class="main" md-gutter="16">
                 <md-layout md-flex="75">
                     <!-- 列表 -->
-                    <TopicList :list="topicList"/>
+                    <TopicList
+                        :page="topicList.page"
+                        :total="topicList.total"
+                        :list="topicList.list"
+                        @onpage="onpage"/>
                 </md-layout>
                 <md-layout md-flex="25">
                     <!-- 卡片 -->
