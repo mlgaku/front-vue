@@ -1,4 +1,5 @@
 <script>
+import 'csshake'
 import { Beat } from '@/utils'
 import { mapState } from 'vuex'
 import { MSG, SUB_ADD, SUB_REMOVE, NOTICE_LIST, NOTICE_REMOVE } from '@/store/types'
@@ -35,7 +36,9 @@ export default {
 
 <template>
 <md-menu md-size="7" md-direction="bottom left" md-align-trigger ref="menu">
-    <md-button class="md-icon-button" md-menu-trigger>
+    <md-button
+        class="md-icon-button" md-menu-trigger
+        :class="{'shake-constant shake-rotate': noticeList && noticeList.length > 0}">
         <md-icon>notifications</md-icon>
     </md-button>
 

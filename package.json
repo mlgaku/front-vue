@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "csshake": "^1.5.2",
     "lodash": "^4.17.4",
     "prismjs": "^1.8.4",
     "timeago.js": "^3.0.2",
