@@ -8,17 +8,32 @@ import { mapGetters } from 'vuex'
 import { SUB_ADD, SUB_REMOVE, TOPIC_LIST } from '@/store/types'
 
 export default {
+    data: () => ({
+        // 节点ID
+        node: ''
+    }),
+
     watch: {
         'info.id': {
             handler (val) {
                 if (val) {
+                    this.node = val
                     this.$store.dispatch(SUB_ADD, {
                         type: TOPIC_LIST,
-                        body: { node: val }
+                        body: { page: 1, node: val }
                     })
                 }
             },
             immediate: true
+        }
+    },
+
+    methods: {
+        onpage (p) {
+            this.$store.dispatch(SUB_ADD, {
+                type: TOPIC_LIST,
+                body: { page: p, node: this.node }
+            })
         }
     },
 
@@ -51,7 +66,11 @@ export default {
                     <!-- 节点信息 -->
                     <NodeInfo :info="info"/>
                     <!-- 主题列表 -->
-                    <TopicList :list="topicList"/>
+                    <TopicList
+                        :page="topicList.page"
+                        :total="topicList.total"
+                        :list="topicList.list"
+                        @onpage="onpage"/>
                 </md-layout>
                 <md-layout md-flex="25">
                     <!-- 卡片 -->
