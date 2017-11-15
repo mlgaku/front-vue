@@ -42,7 +42,7 @@ export default {
                         <span class="badge" v-if="x.user.identity > 0">{{ x.user.identity === 2 ? 'FOU' : 'MOD' }}</span>
                         <span class="date" :title="x.date">{{ date(x.date) }}</span>
                     </div>
-                    <div class="badge">
+                    <div v-if="per > 0" class="badge">
                         {{ (page - 1) * per + i + 1 }}
                     </div>
                 </div>
