@@ -76,6 +76,7 @@ export default {
 
 <style scoped>
 .main {
+    overflow: hidden;
     align-items: flex-start;
 }
 .main > .md-layout {

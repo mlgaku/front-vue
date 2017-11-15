@@ -7,6 +7,7 @@ import { Validator } from './utils'
 
 import Toolbar from '@/components/Toolbar'
 import Snackbar from './components/Snackbar'
+import Shortcut from '@/components/Shortcut'
 import { SUB_ADD, SUB_REMOVE, SITE_STATE, NODE_LIST } from './store/types'
 
 Vue.use(Validator)
@@ -31,7 +32,7 @@ export default {
         this.$store.dispatch(SUB_REMOVE, NODE_LIST)
     },
 
-    components: { Toolbar, Snackbar }
+    components: { Toolbar, Snackbar, Shortcut }
 }
 </script>
 
@@ -43,6 +44,8 @@ export default {
     <router-view/>
     <!-- 全局提示 -->
     <Snackbar :msg="$store.state.msg" @clear="$store.dispatch('CLEAR')"/>
+    <!-- 全局按钮 -->
+    <Shortcut/>
 </div>
 </template>
 

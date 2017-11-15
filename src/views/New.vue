@@ -36,37 +36,35 @@ export default {
 </script>
 
 <template>
-<div>
-    <md-layout md-align="center">
-        <md-layout class="main" md-flex="65">
-            <Card title="发表主题" nopad>
-                <form novalidate @submit.stop.prevent="submit()">
-                    <!-- 标题 -->
-                    <textarea class="title" v-model="topicInfo.title" placeholder="请输入主题标题，如果标题能够表达完整内容，则正文可以为空"></textarea>
+<md-layout md-align="center">
+    <md-layout class="main" md-flex="65">
+        <Card title="发表主题" nopad>
+            <form novalidate @submit.stop.prevent="submit()">
+                <!-- 标题 -->
+                <textarea class="title" v-model="topicInfo.title" placeholder="请输入主题标题，如果标题能够表达完整内容，则正文可以为空"></textarea>
 
-                    <!-- 编辑器 -->
-                    <Editor class="editor" v-model="topicInfo.content" linenum linewrap/>
+                <!-- 编辑器 -->
+                <Editor class="editor" v-model="topicInfo.content" linenum linewrap/>
 
-                    <md-layout class="submit">
-                        <!-- 节点列表 -->
-                        <md-layout>
-                            <md-input-container>
-                                <label for="node">选择节点</label>
-                                <md-select id="node" v-model="topicInfo.node">
-                                    <md-option v-for="x in nodeList" :key="x.id" :value="x.id">{{ x.title }}</md-option>
-                                </md-select>
-                            </md-input-container>
-                        </md-layout>
-
-                        <md-layout>
-                            <md-button type="submit" class="md-raised md-primary">发表</md-button>
-                        </md-layout>
+                <md-layout class="submit">
+                    <!-- 节点列表 -->
+                    <md-layout>
+                        <md-input-container>
+                            <label for="node">选择节点</label>
+                            <md-select id="node" v-model="topicInfo.node">
+                                <md-option v-for="x in nodeList" :key="x.id" :value="x.id">{{ x.title }}</md-option>
+                            </md-select>
+                        </md-input-container>
                     </md-layout>
-                </form>
-            </Card>
-        </md-layout>
+
+                    <md-layout>
+                        <md-button type="submit" class="md-raised md-primary">发表</md-button>
+                    </md-layout>
+                </md-layout>
+            </form>
+        </Card>
     </md-layout>
-</div>
+</md-layout>
 </template>
 
 <style scoped>

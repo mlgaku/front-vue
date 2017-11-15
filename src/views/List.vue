@@ -1,6 +1,5 @@
 <script>
 import Card from '@/components/Card'
-import Shortcut from '@/components/Shortcut'
 import NodeInfo from '@/components/NodeInfo'
 import TopicList from '@/components/TopicList'
 
@@ -53,7 +52,7 @@ export default {
         this.$store.dispatch(SUB_REMOVE, TOPIC_LIST)
     },
 
-    components: { Card, Shortcut, NodeInfo, TopicList }
+    components: { Card, NodeInfo, TopicList }
 }
 </script>
 
@@ -82,9 +81,6 @@ export default {
             </md-layout>
         </md-layout>
     </md-layout>
-
-    <!-- 快捷按钮 -->
-    <Shortcut/>
 </div>
 </template>
 

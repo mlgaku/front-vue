@@ -1,6 +1,5 @@
 <script>
 import Card from '@/components/Card'
-import Shortcut from '@/components/Shortcut'
 import TopicList from '@/components/TopicList'
 
 import { mapGetters } from 'vuex'
@@ -31,7 +30,7 @@ export default {
         'topicList'
     ]),
 
-    components: { Card, Shortcut, TopicList }
+    components: { Card, TopicList }
 }
 </script>
 
@@ -58,9 +57,6 @@ export default {
             </md-layout>
         </md-layout>
     </md-layout>
-
-    <!-- 快捷按钮 -->
-    <Shortcut/>
 </div>
 </template>
 
