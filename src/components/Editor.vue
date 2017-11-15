@@ -78,6 +78,10 @@ export default {
 
 <style scoped>
 .md-layout > .md-layout:nth-child(1) {
+    overflow: hidden;
     border-right: 1px solid #e0e0e0;
+}
+.md-layout > .md-layout:nth-child(2) {
+    overflow: auto;
 }
 </style>
