@@ -43,6 +43,7 @@ export default {
                 <md-layout md-flex="75">
                     <!-- 列表 -->
                     <TopicList
+                        :per="topicList.per"
                         :page="topicList.page"
                         :total="topicList.total"
                         :list="topicList.list"

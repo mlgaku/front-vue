@@ -5,6 +5,8 @@ import { mapGetters } from 'vuex'
 
 export default {
     props: {
+        // 每页数量
+        per: Number,
         // 当前页
         page: Number,
         // 总页数

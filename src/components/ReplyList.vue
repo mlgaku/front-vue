@@ -5,6 +5,8 @@ import { mapGetters } from 'vuex'
 
 export default {
     props: {
+        // 每页数量
+        per: Number,
         // 当前页
         page: Number,
         // 总页数
@@ -28,15 +30,21 @@ export default {
 <md-whiteframe md-elevation="2">
     <!-- 列表 -->
     <md-list class="custom-list md-triple-line">
-        <md-list-item v-for="x in list" :key="x.id" class="reply-list">
+        <md-list-item v-for="(x, i) in list" :key="x.id" class="reply-list">
             <md-avatar v-if="!noavt">
                 <img :src="avatarURL(x.user)">
             </md-avatar>
 
             <div class="md-list-text-container">
-                <div class="author">
-                    <router-link v-if="x.user.name" :to="`/user/${x.user.name}`">{{ x.user.name }}</router-link>
-                    <span :title="x.date">{{ date(x.date) }}</span>
+                <div class="meta">
+                    <div class="base">
+                        <router-link v-if="x.user.name" :to="`/user/${x.user.name}`">{{ x.user.name }}</router-link>
+                        <span class="badge" v-if="x.user.identity > 0">{{ x.user.identity === 2 ? 'FOU' : 'MOD' }}</span>
+                        <span class="date" :title="x.date">{{ date(x.date) }}</span>
+                    </div>
+                    <div class="badge">
+                        {{ (page - 1) * per + i + 1 }}
+                    </div>
                 </div>
                 <div class="content">
                     <Marked :content="x.content"/>
@@ -59,10 +67,33 @@ export default {
 .noavt {
     margin-left: 0;
 }
-.author > a {
+.badge {
+    color: white;
+    font-size: 12px;
+    line-height: 1;
+    min-width: 22px;
+    padding: 0px 4px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.meta > .badge {
+    background: #a7a7a7;
+}
+.meta .base > a {
     margin-right: 10px;
 }
-.author > span {
+.meta .base > .badge {
+    margin-left: -5px;
+    margin-right: 10px;
+    background: #53aef6;
+}
+.meta .base > .date {
     color: gray;
     font-size: 13px;
 }

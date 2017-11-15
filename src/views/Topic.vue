@@ -55,6 +55,7 @@ export default {
                 <TopicInfo :info="topicInfo"/>
                 <!-- 回复列表 -->
                 <ReplyList
+                    :per="replyList.per"
                     :page="replyList.page"
                     :total="replyList.total"
                     :list="replyList.list"

@@ -67,6 +67,7 @@ export default {
                     <NodeInfo :info="info"/>
                     <!-- 主题列表 -->
                     <TopicList
+                        :per="topicList.per"
                         :page="topicList.page"
                         :total="topicList.total"
                         :list="topicList.list"
