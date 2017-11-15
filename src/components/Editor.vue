@@ -29,7 +29,7 @@ export default {
     watch: {
         value (val) {
             const v = this.codemirror.getValue()
-            if (val && val !== v && val !== _.trim(v)) {
+            if (val !== v && val !== _.trim(v)) {
                 this.codemirror.setValue(val)
             }
         }

@@ -60,6 +60,7 @@ export default {
     <Pagination
         :page="page"
         :total="total"
+        v-if="total > 1"
         @onpage="$emit('onpage', arguments[0])"/>
 </md-whiteframe>
 </template>

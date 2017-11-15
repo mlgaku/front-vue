@@ -12,12 +12,24 @@ export default {
         this.$store.dispatch(TOPIC_INFO, this.topicId)
         this.$store.dispatch(SUB_ADD, {
             type: REPLY_LIST,
-            body: { topic: this.topicId }
+            body: { page: -1, topic: this.topicId }
         })
     },
 
     destroyed () {
         this.$store.dispatch(SUB_REMOVE, REPLY_LIST)
+    },
+
+    methods: {
+        onpage (p) {
+            this.$store.dispatch(SUB_ADD, {
+                type: REPLY_LIST,
+                body: {
+                    topic: this.topicId,
+                    page: p === this.replyList.total ? -1 : p
+                }
+            })
+        }
     },
 
     computed: {
@@ -42,7 +54,11 @@ export default {
                 <!-- 主题信息 -->
                 <TopicInfo :info="topicInfo"/>
                 <!-- 回复列表 -->
-                <ReplyList :list="replyList"/>
+                <ReplyList
+                    :page="replyList.page"
+                    :total="replyList.total"
+                    :list="replyList.list"
+                    @onpage="onpage"/>
                 <!-- 回复主题 -->
                 <Reply :tid="topicId"/>
             </md-layout>

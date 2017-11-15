@@ -28,8 +28,8 @@ export default {
 
     methods: {
         submit () {
-            if (this.content.length < 8 || this.content.length > 300) {
-                this.$store.dispatch(MSG, '回复内容长度需要在 8-300 字以内')
+            if (this.content.length < 5 || this.content.length > 300) {
+                this.$store.dispatch(MSG, '回复内容长度需要在 5-300 字以内')
                 return
             }
 

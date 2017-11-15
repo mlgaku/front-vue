@@ -1,20 +1,10 @@
 <script>
 export default {
-    data: () => ({
-        select: 1
-    }),
-
     props: {
         // 当前页
         page: Number,
         // 总页数
         total: Number
-    },
-
-    watch: {
-        select (val) {
-            this.$emit('onpage', val)
-        }
     },
 
     methods: {
@@ -26,6 +16,11 @@ export default {
         next () {
             if (this.total > this.page) {
                 this.$emit('onpage', this.page + 1)
+            }
+        },
+        select (val) {
+            if (val && val !== this.page) {
+                this.$emit('onpage', val)
             }
         }
     },
@@ -57,7 +52,7 @@ export default {
 <div class="pagination">
     <div class="page">
         <span>Pages: </span>
-        <md-select v-model="select">
+        <md-select :value="page" @input="select">
             <md-option v-for="(x, i) in pageList" :key="i" :value="x">{{ x }}</md-option>
         </md-select>
     </div>
