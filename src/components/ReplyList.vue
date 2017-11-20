@@ -1,9 +1,21 @@
 <script>
 import Marked from './Marked'
+import InputBox from './InputBox'
 import Pagination from './Pagination'
-import { mapGetters } from 'vuex'
+
+import { Beat } from '@/utils'
+import { mapState, mapGetters } from 'vuex'
+import { MSG, REPLY_EDIT } from '@/store/types'
 
 export default {
+    data: () => ({
+        // 编辑回复
+        editInfo: {
+            id: '',
+            content: ''
+        }
+    }),
+
     props: {
         // 每页数量
         per: Number,
@@ -17,12 +29,32 @@ export default {
         noavt: Boolean
     },
 
-    computed: mapGetters([
-        'date',
-        'avatarURL'
-    ]),
+    watch: {
+        editStatus (val) {
+            if (Beat(val)) {
+                this.editInfo.id = ''
+                this.$store.dispatch(MSG, '回复编辑成功')
+            }
+        }
+    },
 
-    components: { Marked, Pagination }
+    methods: {
+        edit () {
+            this.$store.dispatch(REPLY_EDIT, this.editInfo)
+        }
+    },
+
+    computed: {
+        ...mapState({
+            editStatus: s => s.reply.edit
+        }),
+        ...mapGetters([
+            'date',
+            'avatarURL'
+        ])
+    },
+
+    components: { Marked, InputBox, Pagination }
 }
 </script>
 
@@ -42,12 +74,13 @@ export default {
                         <span class="badge" v-if="x.user.identity > 0">{{ x.user.identity === 2 ? 'FOU' : 'MOD' }}</span>
                         <span class="date" :title="x.date">{{ date(x.date) }}</span>
                     </div>
-                    <div v-if="per > 0" class="badge">
+                    <div v-if="per > 0" class="badge" @click="editInfo.id = x.id; editInfo.content = x.content">
                         {{ (page - 1) * per + i + 1 }}
                     </div>
                 </div>
                 <div class="content">
-                    <Marked :content="x.content"/>
+                    <span v-if="x.content === undefined">该评论已被管理人员删除</span>
+                    <Marked v-else :content="x.content"/>
                 </div>
             </div>
 
@@ -60,6 +93,17 @@ export default {
         :total="total"
         v-if="total > 1"
         @onpage="$emit('onpage', arguments[0])"/>
+
+    <!-- 编辑回复 -->
+    <InputBox :show="editInfo.id !== ''" title="编辑" @close="editInfo.id = ''" @submit="edit()">
+        <form novalidate @submit.stop.prevent>
+            <md-input-container>
+                <label>内容</label>
+                <md-textarea maxlength="300" v-model="editInfo.content"></md-textarea>
+            </md-input-container>
+        </form>
+    </InputBox>
+
 </md-whiteframe>
 </template>
 

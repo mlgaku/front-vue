@@ -63,6 +63,12 @@ export default {
             <div class="text" v-if="x.type == 5">
                 {{ x.user }} 修改并移动了你的主题 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }}</router-link>
             </div>
+            <div class="text" v-if="x.type == 6">
+                {{ x.user }} 编辑了你在 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }} 主题中的回复</router-link>
+            </div>
+            <div class="text" v-if="x.type == 7">
+                {{ x.user }} 删除了你在 <router-link :to="`/topic/${x.topic_id}`">{{ x.topic_title }} 主题中的回复</router-link>
+            </div>
             <md-button class="md-icon-button" @click="remove(x.id)">
                 <md-icon>delete</md-icon>
             </md-button>
