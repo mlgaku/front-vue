@@ -45,6 +45,7 @@ export const TOPIC_NEW = 'TOPIC_NEW'
 export const TOPIC_EDIT = 'TOPIC_EDIT'
 export const TOPIC_LIST = 'TOPIC_LIST'
 export const TOPIC_INFO = 'TOPIC_INFO'
+export const TOPIC_SUBTLE = 'TOPIC_SUBTLE'
 
 // 回复
 export const REPLY_NEW = 'REPLY_NEW'

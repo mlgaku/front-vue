@@ -1,5 +1,5 @@
 import { Beat } from '@/utils'
-import { TOPIC_NEW, TOPIC_EDIT, TOPIC_LIST, TOPIC_INFO } from '../types'
+import { TOPIC_NEW, TOPIC_EDIT, TOPIC_LIST, TOPIC_INFO, TOPIC_SUBTLE } from '../types'
 
 const state = {
     // 主题列表
@@ -8,6 +8,8 @@ const state = {
     info: {},
     // 编辑成功
     edit: 0,
+    // 附加成功
+    subtle: 0,
     // 发表成功后的主题ID
     new: ''
 }
@@ -25,6 +27,9 @@ const actions = {
     },
     [TOPIC_INFO] ({ commit }, id) {
         commit(TOPIC_INFO, { id })
+    },
+    [TOPIC_SUBTLE] ({ commit }, info) {
+        commit(TOPIC_SUBTLE, info)
     }
 }
 
@@ -47,6 +52,11 @@ const mutations = {
     [TOPIC_INFO] (state, body) {
         if (body.status === true) {
             state.info = body.data
+        }
+    },
+    [TOPIC_SUBTLE] (state, body) {
+        if (body.status === true) {
+            state.subtle = Beat(true)
         }
     }
 }

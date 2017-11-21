@@ -93,7 +93,6 @@ export default {
         :total="total"
         v-if="total > 1"
         @onpage="$emit('onpage', arguments[0])"/>
-
     <!-- 编辑回复 -->
     <InputBox :show="editInfo.id !== ''" title="编辑" @close="editInfo.id = ''" @submit="edit()">
         <form novalidate @submit.stop.prevent>
@@ -103,7 +102,6 @@ export default {
             </md-input-container>
         </form>
     </InputBox>
-
 </md-whiteframe>
 </template>
 
