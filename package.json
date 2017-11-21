@@ -13,7 +13,9 @@
   "dependencies": {
     "csshake": "^1.5.2",
     "lodash": "^4.17.4",
+    "node-sass": "^4.7.2",
     "prismjs": "^1.8.4",
+    "sass-loader": "^6.0.6",
     "timeago.js": "^3.0.2",
     "vee-validate": "^2.0.0-rc.21",
     "vue": "^2.5.3",

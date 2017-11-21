@@ -160,6 +160,30 @@ export default {
                     v-validate="'min:5|max:100'"/>
                 <span class="md-error" v-show="errors.has('edit.intro')">{{ errors.first('edit.intro') }}</span>
             </md-input-container>
+            <md-input-container :class="{'md-input-invalid': errors.has('edit.github')}">
+                <label>GitHub</label>
+                <md-input
+                    name="github"
+                    v-model="userInfo.github"
+                    v-validate="'min:20|max:50|url'"/>
+                <span class="md-error" v-show="errors.has('edit.github')">{{ errors.first('edit.github') }}</span>
+            </md-input-container>
+            <md-input-container :class="{'md-input-invalid': errors.has('edit.twitter')}">
+                <label>Twitter</label>
+                <md-input
+                    name="twitter"
+                    v-model="userInfo.twitter"
+                    v-validate="'min:20|max:50|url'"/>
+                <span class="md-error" v-show="errors.has('edit.twitter')">{{ errors.first('edit.twitter') }}</span>
+            </md-input-container>
+            <md-input-container :class="{'md-input-invalid': errors.has('edit.telegram')}">
+                <label>Telegram</label>
+                <md-input
+                    name="telegram"
+                    v-model="userInfo.telegram"
+                    v-validate="'min:15|max:40|url'"/>
+                <span class="md-error" v-show="errors.has('edit.telegram')">{{ errors.first('edit.telegram') }}</span>
+            </md-input-container>
             <md-button type="submit" class="md-raised md-primary">保存修改</md-button>
         </form>
     </Card>

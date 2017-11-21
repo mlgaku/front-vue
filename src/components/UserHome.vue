@@ -33,7 +33,7 @@ export default {
             <md-card-header-text>
                 <div class="md-title">{{ info.user.name }}</div>
                 <div class="md-subhead">
-                    <p>{{ info.user.intro }}</p>
+                    <p>{{ info.user.tagline }}</p>
                     <p>加入于 {{ info.user.reg_date }}</p>
                 </div>
             </md-card-header-text>
@@ -48,7 +48,6 @@ export default {
                         <span>Call</span>
                         <md-icon>phone</md-icon>
                     </md-menu-item>
-
                     <md-menu-item>
                         <span>Send a message</span>
                         <md-icon>message</md-icon>
@@ -58,7 +57,23 @@ export default {
         </md-card-header>
 
         <md-card-content>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
+            <a class="chip" target="_blank" v-if="info.user.website" :href="info.user.website">
+                <md-icon>home</md-icon>
+                <span>{{ info.user.website }}</span>
+            </a>
+            <a class="chip" target="_blank" v-if="info.user.github" :href="info.user.github">
+                <i class="github"></i>
+                <span>{{ info.user.github }}</span>
+            </a>
+            <a class="chip" target="_blank" v-if="info.user.twitter" :href="info.user.twitter">
+                <i class="twitter"></i>
+                <span>{{ info.user.twitter }}</span>
+            </a>
+            <a class="chip" target="_blank" v-if="info.user.telegram" :href="info.user.telegram">
+                <i class="telegram"></i>
+                <span>{{ info.user.telegram }}</span>
+            </a>
+            <div class="intro">{{ info.user.intro }}</div>
         </md-card-content>
     </md-card>
     <!-- 发表的主题 -->
@@ -72,13 +87,59 @@ export default {
 </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../assets/icon.scss';
+
 .root {
     width: 100%;
+    & > * + * {
+        margin-top: 20px;
+    }
 }
-.root > * + * {
-    margin-top: 20px;
+
+a.chip {
+    display: inline-flex;
+    background: #f1f1f1;
+    align-items: center;
+    border-radius: 20px;
+    padding: 5px 10px 5px 5px;
+    color: rgba(0, 0, 0, .87);
+
+    & > i {
+        width: 24px;
+        height: 24px;
+        background-size: cover;
+
+        &.github {
+            @include icon-github;
+        }
+        &.twitter {
+            @include icon-twitter;
+        }
+        &.telegram {
+            @include icon-telegram;
+        }
+    }
+
+    & > span {
+        margin-left: 5px;
+    }
+
+    &:hover {
+        background: #dedede;
+        text-decoration: none;
+        color: rgba(0, 0, 0, .87);
+    }
+
+    & + a.chip {
+        margin-left: 5px;
+    }
 }
+
+.intro {
+    margin-top: 10px;
+}
+
 .md-title {
     margin-top: 0 !important;
 }
