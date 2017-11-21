@@ -103,7 +103,7 @@ a.chip {
     align-items: center;
     border-radius: 20px;
     padding: 5px 10px 5px 5px;
-    color: rgba(0, 0, 0, .87);
+    color: rgba(0, 0, 0, .87) !important;
 
     & > i {
         width: 24px;
@@ -128,7 +128,6 @@ a.chip {
     &:hover {
         background: #dedede;
         text-decoration: none;
-        color: rgba(0, 0, 0, .87);
     }
 
     & + a.chip {
