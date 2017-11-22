@@ -1,6 +1,7 @@
 import Beat from './beat'
 import Draw from './draw'
 import Sort from './sort'
+import Crc32 from './crc32'
 import Prism from './prism'
 import Socket from './socket'
 import Timeago from './timeago'
@@ -13,6 +14,7 @@ export {
     Beat,
     Draw,
     Sort,
+    Crc32,
     Prism,
     Socket,
     Timeago,

@@ -1,7 +1,8 @@
 <script>
 export default {
     data: () => ({
-        alive: false
+        alive: false,
+        closed: false
     }),
 
     props: {
@@ -16,13 +17,22 @@ export default {
     watch: {
         show (val) {
             const { open, close } = this.$refs[this.name]
+
+            // 打开
             if (val) {
                 this.alive = true
+                this.closed = false
                 open()
-            } else {
-                close()
-                setTimeout(() => { this.alive = false }, 500)
+                return
             }
+
+            // 还没有关闭
+            if (this.closed === false) {
+                close()
+            }
+
+            // 关闭动画结束从插槽中彻底销毁
+            setTimeout(() => { this.alive = false }, 500)
         }
     },
 
@@ -35,7 +45,7 @@ export default {
 </script>
 
 <template>
-<md-dialog :ref="name" :md-click-outside-to-close="false">
+<md-dialog :ref="name" @close="closed=true; $emit('close')">
     <md-dialog-title>{{ title }}</md-dialog-title>
 
     <md-dialog-content>

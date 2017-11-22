@@ -1,4 +1,5 @@
 <script>
+import Avatar from './Avatar'
 import Marked from './Marked'
 import InputBox from './InputBox'
 import Pagination from './Pagination'
@@ -49,12 +50,11 @@ export default {
             editStatus: s => s.reply.edit
         }),
         ...mapGetters([
-            'date',
-            'avatarURL'
+            'date'
         ])
     },
 
-    components: { Marked, InputBox, Pagination }
+    components: { Avatar, Marked, InputBox, Pagination }
 }
 </script>
 
@@ -64,7 +64,7 @@ export default {
     <md-list class="custom-list md-triple-line">
         <md-list-item v-for="(x, i) in list" :key="x.id" class="reply-list">
             <md-avatar v-if="!noavt">
-                <img :src="avatarURL(x.user)">
+                <Avatar :user="x.user"/>
             </md-avatar>
 
             <div class="md-list-text-container">

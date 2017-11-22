@@ -1,9 +1,8 @@
 <script>
 import Card from './Card'
+import Avatar from './Avatar'
 import TopicList from './TopicList'
 import ReplyList from './ReplyList'
-
-import { mapGetters } from 'vuex'
 
 export default {
     props: {
@@ -11,13 +10,7 @@ export default {
         info: Object
     },
 
-    computed: {
-        ...mapGetters([
-            'avatarURL'
-        ])
-    },
-
-    components: { Card, TopicList, ReplyList }
+    components: { Card, Avatar, TopicList, ReplyList }
 }
 </script>
 
@@ -27,7 +20,7 @@ export default {
     <md-card v-if="info.user">
         <md-card-header>
             <md-card-media>
-                <img :src="avatarURL(info.user)">
+                <Avatar :user="info.user"/>
             </md-card-media>
 
             <md-card-header-text>

@@ -1,4 +1,5 @@
 <script>
+import Avatar from './Avatar'
 import Pagination from './Pagination'
 
 import { mapGetters } from 'vuex'
@@ -20,12 +21,11 @@ export default {
     computed: {
         ...mapGetters([
             'date',
-            'nodeTitle',
-            'avatarURL'
+            'nodeTitle'
         ])
     },
 
-    components: { Pagination }
+    components: { Avatar, Pagination }
 }
 </script>
 
@@ -35,7 +35,7 @@ export default {
     <md-list class="custom-list md-triple-line">
         <md-list-item v-for="x in list" :key="x.id">
             <md-avatar v-if="!noavt">
-                <img :src="avatarURL(x.user)">
+                <Avatar :user="x.user"/>
             </md-avatar>
 
             <div class="md-list-text-container">

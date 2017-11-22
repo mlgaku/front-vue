@@ -1,5 +1,5 @@
 import { SITE_STATE } from '../types'
-import { Draw, Timeago } from '@/utils'
+import { Timeago } from '@/utils'
 
 const state = {
     // 站点信息
@@ -13,7 +13,7 @@ const getters = {
     date: state => date => Timeago(date),
 
     avatarURL: state => user =>
-        user.avatar ? state.state.avatar_url.replace('{name}', user.name) : Draw(user.name)
+        user.avatar ? state.state.avatar_url.replace('{name}', user.name) : `https://secure.gravatar.com/avatar/${user.email}`
 }
 
 const actions = {
