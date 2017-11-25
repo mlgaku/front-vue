@@ -12,6 +12,7 @@ import 'codemirror/mode/php/php'
 
 export default {
     data: () => ({
+        scroll: 0,
         codemirror: null
     }),
 
@@ -38,6 +39,13 @@ export default {
     methods: {
         change (cm) {
             this.$emit('input', cm.getValue())
+
+            const scroll = cm.getScrollInfo()
+            if (scroll.top === 0) {
+                this.scroll = 0
+            } else if (scroll.top + scroll.clientHeight === scroll.height) {
+                this.scroll = 99999 + scroll.height + Math.random()
+            }
         }
     },
 
@@ -46,7 +54,7 @@ export default {
             return this.value || ''
         },
         maxHeight () {
-            return this.height || '450px'
+            return this.height || '500px'
         }
     },
 
@@ -57,8 +65,8 @@ export default {
             lineNumbers: this.linenum,
             lineWrapping: this.linewrap
         })
-        this.codemirror.on('change', this.change)
         this.codemirror.setSize('100%', this.maxHeight)
+        this.codemirror.on('change', _.debounce(this.change, 300))
     },
 
     components: { Marked }
@@ -71,7 +79,7 @@ export default {
         <textarea ref="editor" v-model="value"></textarea>
     </md-layout>
     <md-layout :style="{'max-height': maxHeight}">
-        <Marked padding="5px" :content="content"/>
+        <Marked padding="5px" :scroll="scroll" :content="content"/>
     </md-layout>
 </md-layout>
 </template>

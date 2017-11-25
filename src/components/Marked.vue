@@ -5,16 +5,23 @@ import 'github-markdown-css'
 
 export default {
     props: {
+        // 滚动
+        scroll: Number,
         // 填充
         padding: String,
         // 原内容
         content: String
     },
 
+    watch: {
+        scroll (val) {
+            this.$refs.preview.scrollTop = val
+        }
+    },
+
     methods: {
         render () {
-            const html = Marked(this.content)
-            return html.replace(/@([a-zA-Z0-9]+)/, '@<at>$1</at>')
+            return Marked(this.content).replace(/@([a-zA-Z0-9]+)/, '@<at>$1</at>')
         }
     },
 
@@ -52,7 +59,12 @@ export default {
 </script>
 
 <template>
-<div v-html="compiled" class="markdown-body" :style="{padding: padding}"></div>
+<div
+    ref="preview"
+    v-html="compiled"
+    class="markdown-body"
+    :style="{padding: padding}"
+ ></div>
 </template>
 
 <style>
