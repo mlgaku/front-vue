@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "blueimp-md5": "^2.10.0",
     "csshake": "^1.5.2",
     "lodash": "^4.17.4",
     "node-sass": "^4.7.2",

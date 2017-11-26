@@ -12,8 +12,8 @@ const state = {
 const getters = {
     date: state => date => Timeago(date),
 
-    avatarURL: state => user =>
-        user.avatar ? state.state.avatar_url.replace('{name}', user.name) : `https://secure.gravatar.com/avatar/${user.email}`
+    avatarURL: (state, getters) => user =>
+        user.avatar ? state.state.avatar_url.replace('{name}', user.name) : `https://secure.gravatar.com/avatar/${getters.emailHash(user.email)}`
 }
 
 const actions = {

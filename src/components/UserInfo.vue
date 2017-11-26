@@ -198,8 +198,8 @@ export default {
             <Avatar :user="userInfo" width="40" height="40"/>
         </div>
         <div v-else>
-            <p>当前还没有上传头像：</p>
-            <p>如果你在 <a href="https://cn.gravatar.com/" target="_blank">Gravatar</a> 设置了头像，则会使用它，否则将为你绘制出默认的头像</p>
+            <p>当前还没有上传头像</p>
+            <p>如果你在 <a href="https://cn.gravatar.com" target="_blank">Gravatar</a> 设置了头像，则会使用它，否则将为你绘制出默认的头像</p>
         </div>
 
         <form ref="avatar" novalidate @submit.stop.prevent="upload" data-vv-scope="none">

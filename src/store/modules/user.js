@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import md5 from 'blueimp-md5'
 import {
     USER_REG, USER_LOGIN, USER_HOME, USER_INFO,
     USER_CHECK, USER_CHECK_EMAIL,
@@ -40,6 +41,8 @@ const state = {
 }
 
 const getters = {
+    emailHash: state => (email = state.info.email) =>
+        email && email.length !== 32 ? md5(email) : email
 }
 
 const actions = {
