@@ -2,7 +2,6 @@
 import Marked from './Marked'
 import InputBox from './InputBox'
 
-import { Beat } from '@/utils'
 import { mapState, mapGetters } from 'vuex'
 import { MSG, TOPIC_SUBTLE } from '@/store/types'
 
@@ -23,7 +22,7 @@ export default {
 
     watch: {
         subtleStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.subtleInfo.topic = ''
                 this.subtleInfo.content = ''
                 this.$store.dispatch(MSG, '补充内容成功')

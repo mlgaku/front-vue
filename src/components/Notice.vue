@@ -1,13 +1,12 @@
 <script>
 import 'csshake'
-import { Beat } from '@/utils'
 import { mapState } from 'vuex'
 import { MSG, SUB_ADD, SUB_REMOVE, NOTICE_LIST, NOTICE_REMOVE } from '@/store/types'
 
 export default {
     watch: {
         removeStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.$store.dispatch(MSG, '删除通知成功')
             }
         }

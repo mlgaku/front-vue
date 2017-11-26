@@ -2,14 +2,13 @@
 import Card from '@/components/Card'
 import Editor from '@/components/Editor'
 
-import { Beat } from '@/utils'
 import { mapState } from 'vuex'
 import { MSG, TOPIC_EDIT, TOPIC_INFO } from '@/store/types'
 
 export default {
     watch: {
         editStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.$store.dispatch(MSG, '编辑主题成功')
                 this.$router.push({ path: `/topic/${this.topicId}` })
             }

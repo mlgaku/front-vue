@@ -1,18 +1,18 @@
-import { Beat } from '@/utils'
 import { NOTICE_LIST, NOTICE_REMOVE } from '../types'
 
 const state = {
     // 通知列表
     list: [],
     // 移除成功
-    remove: 0
+    remove: false
 }
 
 const getters = {
 }
 
 const actions = {
-    [NOTICE_REMOVE] ({ commit }, id) {
+    [NOTICE_REMOVE] ({ state, commit }, id) {
+        state.remove = false
         commit(NOTICE_REMOVE, { id })
     }
 }
@@ -25,7 +25,7 @@ const mutations = {
     },
     [NOTICE_REMOVE] (state, body) {
         if (body.status === true) {
-            state.remove = Beat(true)
+            state.remove = true
         }
     }
 }

@@ -12,7 +12,8 @@ const getters = {
 }
 
 const actions = {
-    [BILL_LIST] ({ commit }) {
+    [BILL_LIST] ({ state, commit }) {
+        state.list = []
         commit(BILL_LIST, {})
     }
 }

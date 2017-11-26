@@ -1,18 +1,18 @@
 import _ from 'lodash'
-import { Beat, Sort } from '@/utils'
+import { Sort } from '@/utils'
 import { NODE_ADD, NODE_EDIT, NODE_LIST, NODE_CHECK, NODE_REMOVE } from '../types'
 
 const state = {
     // 添加成功
-    add: 0,
+    add: false,
     // 编辑成功
-    edit: 0,
+    edit: false,
     // 节点列表
     list: [],
     // 检查节点名
-    check: 0,
+    check: null,
     // 删除节点
-    remove: 0
+    remove: false
 }
 
 const getters = {
@@ -46,16 +46,20 @@ const getters = {
 }
 
 const actions = {
-    [NODE_ADD] ({ commit }, info) {
+    [NODE_ADD] ({ state, commit }, info) {
+        state.add = false
         commit(NODE_ADD, info)
     },
-    [NODE_EDIT] ({ commit }, info) {
+    [NODE_EDIT] ({ state, commit }, info) {
+        state.edit = false
         commit(NODE_EDIT, info)
     },
-    [NODE_CHECK]: _.debounce(({ commit }, name) => {
+    [NODE_CHECK]: _.debounce(({ state, commit }, name) => {
+        state.check = null
         commit(NODE_CHECK, { name })
     }, 500),
-    [NODE_REMOVE] ({ commit }, id) {
+    [NODE_REMOVE] ({ state, commit }, id) {
+        state.remove = false
         commit(NODE_REMOVE, { id })
     }
 }
@@ -63,12 +67,12 @@ const actions = {
 const mutations = {
     [NODE_ADD] (state, body) {
         if (body.status === true) {
-            state.add = Beat(true)
+            state.add = true
         }
     },
     [NODE_EDIT] (state, body) {
         if (body.status === true) {
-            state.edit = Beat(true)
+            state.edit = true
         }
     },
     [NODE_LIST] (state, body) {
@@ -78,12 +82,12 @@ const mutations = {
     },
     [NODE_CHECK] (state, body) {
         if (body.status === true) {
-            state.check = Beat(body.data)
+            state.check = body.data
         }
     },
     [NODE_REMOVE] (state, body) {
         if (body.status === true) {
-            state.remove = Beat(true)
+            state.remove = true
         }
     }
 }

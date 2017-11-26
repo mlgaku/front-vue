@@ -1,4 +1,3 @@
-import Beat from './beat'
 import Draw from './draw'
 import Sort from './sort'
 import Crc32 from './crc32'
@@ -11,7 +10,6 @@ import Protocol from './protocol'
 import Validator from './validator'
 
 export {
-    Beat,
     Draw,
     Sort,
     Crc32,

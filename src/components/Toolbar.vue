@@ -1,5 +1,5 @@
 <script>
-import { Beat } from '@/utils'
+import _ from 'lodash'
 import { mapState } from 'vuex'
 import { Validator } from 'vee-validate'
 
@@ -23,19 +23,23 @@ export default {
 
     watch: {
         'check.name': function (val) {
-            this.checkUserName(Beat(val))
+            if (_.isBoolean(val)) {
+                this.checkUserName(val)
+            }
         },
         'check.email': function (val) {
-            this.checkUserEmail(Beat(val))
+            if (_.isBoolean(val)) {
+                this.checkUserEmail(val)
+            }
         },
         regStatus: function (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.show = 0
                 this.$store.dispatch(MSG, '注册成功')
             }
         },
         loginStatus: function (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.show = 0
             }
         }

@@ -3,7 +3,6 @@ import _ from 'lodash'
 import Confirm from './Confirm'
 import InputBox from './InputBox'
 
-import { Beat } from '@/utils'
 import { Validator } from 'vee-validate'
 import { mapState, mapGetters } from 'vuex'
 import { MSG, NODE_ADD, NODE_EDIT, NODE_CHECK, NODE_REMOVE } from '@/store/types'
@@ -29,23 +28,25 @@ export default {
 
     watch: {
         check (val) {
-            this.checkNodeName(Beat(val))
+            if (_.isBoolean(val)) {
+                this.checkNodeName(val)
+            }
         },
         addStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.$emit('close', 1)
                 this.$store.dispatch(MSG, '添加节点成功')
             }
         },
         editStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.$emit('close', 2)
                 this.$store.dispatch(MSG, '编辑节点成功')
                 this.$router.push({ path: `/node/${this.lastName}` })
             }
         },
         removeStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.$emit('close', 3)
                 this.$store.dispatch(MSG, '移除节点成功')
                 this.$router.push({ path: `/node` })

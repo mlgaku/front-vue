@@ -2,7 +2,6 @@
 import Card from './Card'
 import Editor from './Editor'
 
-import { Beat } from '@/utils'
 import { mapState } from 'vuex'
 import { MSG, REPLY_NEW } from '@/store/types'
 
@@ -19,7 +18,7 @@ export default {
 
     watch: {
         replyStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.content = ''
                 this.$store.dispatch(MSG, '回复成功')
             }

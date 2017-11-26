@@ -8,18 +8,17 @@ export default {
         user: Object
     },
 
-    computed: {
-        id () {
-            return `avatar-${this.user.name}-${Math.random()}`
-        },
-        ...mapGetters([
-            'avatarURL'
-        ])
-    },
+    computed: mapGetters([
+        'avatarURL'
+    ]),
 
     directives: {
         avatar: (el, binding) => {
-            const { id, url, name, avatar } = binding.value
+            const { url, name, avatar } = binding.value
+            if (name === undefined) {
+                return
+            }
+
             if (avatar === true) {
                 el.src = url
                 return
@@ -30,11 +29,6 @@ export default {
             .then(blob => {
                 const reader = new FileReader()
                 reader.onload = () => {
-                    const el = document.getElementById(id)
-                    if (!el) {
-                        return
-                    }
-
                     const data = reader.result
                     if (Crc32(data) === 2137162192) {
                         el.src = Draw(name)
@@ -50,5 +44,5 @@ export default {
 </script>
 
 <template>
-<img :id="id" v-avatar="{ id, url: avatarURL(user), name: user.name, avatar: user.avatar }"/>
+<img v-avatar="{ url: avatarURL(user), name: user.name, avatar: user.avatar }"/>
 </template>

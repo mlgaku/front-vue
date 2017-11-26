@@ -1,9 +1,13 @@
 <script>
 import Card from './Card'
+import Avatar from './Avatar'
 
-import { Beat } from '@/utils'
-import { mapState, mapGetters } from 'vuex'
-import { MSG, USER_AVATAR, USER_SET_AVATAR, USER_EDIT_PROFILE, USER_CHANGE_PASSWORD } from '@/store/types'
+import { mapState } from 'vuex'
+import {
+    MSG,
+    USER_AVATAR, USER_SET_AVATAR, USER_REMOVE_AVATAR,
+    USER_EDIT_PROFILE, USER_CHANGE_PASSWORD
+} from '@/store/types'
 
 export default {
     data: () => ({
@@ -14,14 +18,14 @@ export default {
     watch: {
         // 编辑资料
         editStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.$store.dispatch(MSG, '成功保存资料')
             }
         },
 
         // 更改密码
         changeStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.$store.dispatch(MSG, '更改密码成功')
             }
         },
@@ -59,14 +63,14 @@ export default {
 
         // 设置头像
         'avatar.set' (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.$store.dispatch(MSG, '设置头像成功')
             }
         },
 
         // 移除头像
         'avatar.remove' (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.$store.dispatch(MSG, '移除头像成功')
             }
         }
@@ -93,6 +97,11 @@ export default {
             this.$store.dispatch(USER_AVATAR)
         },
 
+        // 取消头像
+        cancel () {
+            this.$store.dispatch(USER_REMOVE_AVATAR)
+        },
+
         // 更改密码
         change () {
             this.validate('change', () => this.$store.dispatch(USER_CHANGE_PASSWORD, this.passwd))
@@ -104,28 +113,19 @@ export default {
         }
     },
 
-    computed: {
-        avatarURL () {
-            return this.userAvatar + '?' + this.avatar.set
-        },
-        ...mapState({
-            avatar: s => s.user.avatar,
-            userInfo: s => s.user.info,
-            editStatus: s => s.user.edit,
-            changeStatus: s => s.user.change
-        }),
-        ...mapGetters([
-            'userAvatar'
-        ])
-    },
+    computed: mapState({
+        avatar: s => s.user.avatar,
+        userInfo: s => s.user.info,
+        editStatus: s => s.user.edit,
+        changeStatus: s => s.user.change
+    }),
 
-    components: { Card }
+    components: { Card, Avatar }
 }
 </script>
 
 <template>
 <div class="root">
-
     <Card title="编辑资料">
         <form novalidate @submit.stop.prevent="edit" data-vv-scope="edit">
             <md-input-container>
@@ -189,13 +189,19 @@ export default {
     </Card>
 
     <Card title="上传头像">
+        <div slot="oper">
+            <a @click="cancel" class="button">取消当前头像</a>
+        </div>
+
         <div class="avatar" v-if="userInfo.avatar">
-            <img :src="avatarURL" width="140" height="140">
-            <img :src="avatarURL" width="40" height="40">
+            <Avatar :user="userInfo" width="140" height="140"/>
+            <Avatar :user="userInfo" width="40" height="40"/>
         </div>
         <div v-else>
-            当前还没有上传头像
+            <p>当前还没有上传头像：</p>
+            <p>如果你在 <a href="https://cn.gravatar.com/" target="_blank">Gravatar</a> 设置了头像，则会使用它，否则将为你绘制出默认的头像</p>
         </div>
+
         <form ref="avatar" novalidate @submit.stop.prevent="upload" data-vv-scope="none">
             <md-input-container>
                 <label>选择图片</label>
@@ -233,33 +239,46 @@ export default {
             <md-button type="submit" class="md-raised md-primary">保存修改</md-button>
         </form>
     </Card>
-
 </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .root {
     width: 100%;
+
+    & > * + * {
+        margin-top: 20px
+    }
 }
+
 .same {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    & > span {
+        color: gray;
+    }
 }
-.same span {
-    color: gray;
-}
-.root > * + * {
-    margin-top: 20px
-}
+
 .avatar img + img {
     margin-left: 10px;
     vertical-align: bottom;
 }
+
 form {
     display: flex;
     align-items: flex-end;
     flex-direction: column;
+}
+
+a.button {
+    color: gray;
+    padding: 0 8px;
+    cursor: pointer;
+    &:hover {
+        color: gray;
+    }
 }
 </style>

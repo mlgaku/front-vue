@@ -4,7 +4,6 @@ import Marked from './Marked'
 import InputBox from './InputBox'
 import Pagination from './Pagination'
 
-import { Beat } from '@/utils'
 import { mapState, mapGetters } from 'vuex'
 import { MSG, REPLY_EDIT } from '@/store/types'
 
@@ -32,7 +31,7 @@ export default {
 
     watch: {
         editStatus (val) {
-            if (Beat(val)) {
+            if (val) {
                 this.editInfo.id = ''
                 this.$store.dispatch(MSG, '回复编辑成功')
             }
