@@ -104,7 +104,4 @@ export default {
     flex: none;
     min-width: auto;
 }
-.markdown-body {
-    background: red;
-}
 </style>

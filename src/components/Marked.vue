@@ -77,9 +77,9 @@ at:hover {
 .markdown-body {
     color: #444;
     width: 100%;
-    overflow-y: auto;
     line-height: 1.8;
     background: white;
+    overflow-y: hidden;
 }
 .markdown-body code[class*="language-"] {
     color: inherit !important;
